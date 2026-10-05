@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>TheNextChapter | In Conversation with Divya Gokulnath</title>
+    <meta name="description" content="BloomBox KJSSE presents TheNextChapter: In conversation with Divya Gokulnath, Co-founder of BYJU'S on 9th October 2026 at Sakarben Auditorium.">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- OpenGraph / Social Meta Tags -->
+    <meta property="og:title" content="TheNextChapter | In Conversation with Divya Gokulnath">
+    <meta property="og:description" content="BloomBox KJSSE presents TheNextChapter. Dream. Build. Bloom. 🌱 9th October 2026 | Sakarben Auditorium">
+    <meta property="og:image" content="assets/bb-logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/bb-logo.png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- External Libraries: Three.js & GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+    <!-- Dynamic Subtle Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation Header (Border Removed) -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="nav-brand" aria-label="TheNextChapter Home">
+                <span class="nav-brand-text">Bloombox <span>• TheNextChapter</span></span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#details" class="nav-link">Event Info</a>
+                <a href="#workshop" class="nav-link">Day 2 Workshop</a>
+                <a href="#register" class="btn-primary nav-cta-btn">Register Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container (Centered & Open Layout) -->
+    <main>
+        <!-- Hero Section (Centered Poster Layout) -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-container text-center">
+                
+                <!-- Centered Hero Content -->
+                <div class="hero-center-content">
+                    <!-- Poster Themed Slanted Banners -->
+                    <div class="poster-banner-group">
+                        <div class="slanted-block block-brought-by">
+                            <span class="block-inner">BROUGHT TO YOU BY BLOOMBOX</span>
+                        </div>
+
+                        <div class="slanted-block block-main-title">
+                            <h1 class="block-inner main-heading-text">THE NEXT CHAPTER</h1>
+                        </div>
+
+                        <div class="slanted-block block-speaker">
+                            <div class="block-inner speaker-block-content">
+                                <span class="speaker-name-title">DIVYA GOKULNATH</span>
+                                <span class="speaker-badge-tag">CO-FOUNDER, BYJU'S</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="hero-tagline">
+                        <span class="quote-mark left">“</span>Your degree is one chapter. What you build next could be<br>
+                        <span class="hero-tagline-brand">TheNextChapter.</span><span class="quote-mark right">”</span>
+                    </p>
+
+                    <p class="hero-desc">
+                        Join us for an interactive conversation with <strong>Divya Gokulnath, Co-founder of BYJU’S</strong>, as she takes us through her journey from an engineering background to teaching, entrepreneurship, and building at scale.
+                    </p>
+
+                    <!-- Key Event Details Badges -->
+                    <div class="event-pill-grid">
+                        <div class="event-pill-item">
+                            <div class="pill-label">DATE</div>
+                            <div class="pill-value">9TH OCT 2026</div>
+                        </div>
+                        <div class="event-pill-item">
+                            <div class="pill-label">TIME</div>
+                            <div class="pill-value">3:00 PM ONWARDS</div>
+                        </div>
+                        <div class="event-pill-item">
+                            <div class="pill-label">VENUE</div>
+                            <div class="pill-value">SAKARBEN AUDITORIUM</div>
+                        </div>
+                    </div>
+
+                    <!-- Hero CTA Buttons -->
+                    <div class="hero-cta-group">
+                        <a href="#register" class="btn-primary" id="hero-register-btn">
+                            <span>REGISTER NOW</span>
+                            <span>→</span>
+                        </a>
+                        <a href="#about" class="btn-secondary">
+                            <span>Explore Session</span>
+                            <span>↓</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About Conversation & The Journey (Centered, Borderless) -->
+        <section class="section" id="about">
+            <div class="container text-center max-w-content">
+                <div class="section-title-wrap">
+                    <span class="section-tag-label">IN CONVERSATION</span>
+                    <h2 class="section-title">The Journey Behind <span class="purple-text">The Next Chapter</span></h2>
+                    <p class="section-subtitle">A candid exploration of turning ideas into high-impact action.</p>
+                </div>
+
+                <!-- Open Story Narrative -->
+                <div class="story-content-wrap">
+                    <p class="lead-text">
+                        <strong>BloomBox – The Entrepreneurship Cell of KJSSE</strong> brings to you <strong>TheNextChapter: Dream. Build. Bloom. 🌱</strong>
+                    </p>
+                    <p>
+                        Join us for an interactive conversation with <strong>Divya Gokulnath, Co-founder of BYJU’S</strong>, as she takes us through her journey from an engineering background to teaching, entrepreneurship, and building at scale.
+                    </p>
+                    <div class="quote-callout">
+                        <p>
+                            <span class="callout-quote-mark left">“</span>This isn't just a conversation about success. It's about everything that comes before it - finding direction, taking an idea seriously, making difficult decisions, navigating uncertainty, building a team, learning from challenges, and continuing to build when the path isn't obvious.<span class="callout-quote-mark right">”</span>
+                        </p>
+                    </div>
+                    <p>
+                        For engineering students, this is a chance to look beyond the usual roadmap and understand what it actually takes to turn <strong>ideas into action</strong>.
+                    </p>
+                    <p>
+                        And this won't be a one-way conversation. Selected participants will also get an opportunity to <strong>interact, ask questions, share their ideas, and receive guidance</strong> during the session.
+                    </p>
+                </div>
+
+                <!-- Why Attend 6-Pillar Grid -->
+                <div class="section-title-wrap" style="margin-top: 4.5rem; margin-bottom: 2rem;">
+                    <span class="section-tag-label">WHY ATTEND?</span>
+                    <h2 class="section-title">What's In It For You?</h2>
+                </div>
+
+                <!-- Why Attend Sticky Notes Board -->
+                <div class="why-attend-board">
+                    <div class="why-attend-grid">
+                        <!-- Sticky Note 1 -->
+                        <div class="feature-box sticky-note-mini">
+                            <div class="mini-sticky-tape"></div>
+                            <div class="feature-icon-badge">🚀</div>
+                            <h3>Building From Scratch</h3>
+                            <p>Hear the entrepreneurial journey behind building from the ground up.</p>
+                            <div class="mini-corner-curl"></div>
+                        </div>
+
+                        <!-- Sticky Note 2 -->
+                        <div class="feature-box sticky-note-mini">
+                            <div class="mini-sticky-tape"></div>
+                            <div class="feature-icon-badge">💡</div>
+                            <h3>Ideas to Ventures</h3>
+                            <p>Understand how ideas evolve into real, sustainable ventures.</p>
+                            <div class="mini-corner-curl"></div>
+                        </div>
+
+                        <!-- Sticky Note 3 -->
+                        <div class="feature-box sticky-note-mini">
+                            <div class="mini-sticky-tape"></div>
+                            <div class="feature-icon-badge">⚖️</div>
+                            <h3>Scale & Decisions</h3>
+                            <p>Learn about critical decision-making, overcoming challenges, and scaling.</p>
+                            <div class="mini-corner-curl"></div>
+                        </div>
+
+                        <!-- Sticky Note 4 -->
+                        <div class="feature-box sticky-note-mini">
+                            <div class="mini-sticky-tape"></div>
+                            <div class="feature-icon-badge">🎓</div>
+                            <h3>Beyond Engineering</h3>
+                            <p>Explore entrepreneurship and career pathways beyond your degree.</p>
+                            <div class="mini-corner-curl"></div>
+                        </div>
+
+                        <!-- Sticky Note 5 -->
+                        <div class="feature-box sticky-note-mini">
+                            <div class="mini-sticky-tape"></div>
+                            <div class="feature-icon-badge">🤖</div>
+                            <h3>Building in the Age of AI</h3>
+                            <p>Understand what venture building and problem-solving look like today.</p>
+                            <div class="mini-corner-curl"></div>
+                        </div>
+
+                        <!-- Sticky Note 6 -->
+                        <div class="feature-box sticky-note-mini">
+                            <div class="mini-sticky-tape"></div>
+                            <div class="feature-icon-badge">🎤</div>
+                            <h3>Live Interaction</h3>
+                            <p>Get a direct opportunity to interact, ask questions, and share your idea.</p>
+                            <div class="mini-corner-curl"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Have an idea? Bring it with you (Open Centered Layout) -->
+                <div class="pitch-open-section">
+                    <span class="section-tag-label">INTERACTIVE OPPORTUNITY</span>
+                    <h3 class="pitch-heading">Have an idea? Bring it with you.</h3>
+                    <p class="pitch-subtext">
+                        You don't need a polished pitch deck or a startup that's already running.<br>
+                        If you're working on an idea - or even have something you've been thinking about - tell us about it while registering.
+                    </p>
+                    <p class="pitch-learn-label">Selected participants may get an opportunity to:</p>
+                    <div class="pitch-steps-flow">
+                        <span class="pitch-step-pill">PITCH</span>
+                        <span class="step-arrow">→</span>
+                        <span class="pitch-step-pill">GET FEEDBACK</span>
+                        <span class="step-arrow">→</span>
+                        <span class="pitch-step-pill">ASK QUESTIONS</span>
+                        <span class="step-arrow">→</span>
+                        <span class="pitch-step-pill">LEARN</span>
+                    </div>
+
+                    <div style="margin-top: 1.75rem;">
+                        <a href="#register" class="btn-primary" style="padding: 0.9rem 2.2rem;">
+                            <span>SUBMIT YOUR IDEA BELOW</span>
+                            <span>↓</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details & Contacts (Centered & Open) -->
+        <section class="section" id="details" style="padding-top: 2rem;">
+            <div class="container text-center max-w-content">
+                <div class="section-title-wrap">
+                    <span class="section-tag-label">EVENT DETAILS</span>
+                    <h2 class="section-title">Join Us At <span class="purple-text">Sakarben Auditorium</span></h2>
+                </div>
+
+                <!-- Sticky Note Event Details Component (Matching Uploaded Design with Purple Color Scheme) -->
+                <div class="sticky-note-wrapper">
+                    <!-- Top Washi Tape Piece -->
+                    <div class="sticky-tape"></div>
+
+                    <div class="sticky-note-card">
+                        <!-- Top Row: Doodle Icon & Branding -->
+                        <div class="sticky-top-row">
+                            <div class="sticky-doodle-icon">
+                                <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Lightbulb / Idea Doodle SVG -->
+                                    <path d="M24 6C16.268 6 10 12.268 10 20C10 24.832 12.448 29.088 16.2 31.6C17.3 32.34 18 33.6 18 35V36C18 37.1 18.9 38 20 38H28C29.1 38 30 37.1 30 36V35C30 33.6 30.7 32.34 31.8 31.6C35.552 29.088 38 24.832 38 20C38 12.268 31.732 6 24 6Z" stroke="#2b0c3f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="#ffffff"/>
+                                    <path d="M19 42H29" stroke="#2b0c3f" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path d="M21 45H27" stroke="#2b0c3f" stroke-width="2" stroke-linecap="round"/>
+                                    <!-- Filament -->
+                                    <path d="M21 24L24 18L27 24" stroke="#7e22ce" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <!-- Glow Rays -->
+                                    <path d="M24 2V4" stroke="#ec4899" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path d="M8 12L10 13" stroke="#ec4899" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path d="M40 12L38 13" stroke="#ec4899" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path d="M4 22H6" stroke="#ec4899" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path d="M42 22H44" stroke="#ec4899" stroke-width="2.5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+
+                            <div class="sticky-brand-tag">
+                                <span class="brand-sub">BLOOMBOX PRESENTS</span>
+                                <span class="brand-main">THE NEXT CHAPTER</span>
+                            </div>
+                        </div>
+
+                        <!-- Sticky Main Title with Hand-drawn Underline -->
+                        <div class="sticky-header-wrap">
+                            <h2 class="sticky-main-title">
+                                EVENT DETAILS & PASS
+                            </h2>
+                            <div class="brush-stroke-underline"></div>
+                        </div>
+
+                        <!-- Lined Content List -->
+                        <div class="sticky-content-list">
+                            <!-- Date & Time -->
+                            <div class="sticky-list-item">
+                                <span class="sticky-bullet-dash">—</span>
+                                <div class="sticky-item-body">
+                                    <strong class="item-title">Date & Timing</strong>
+                                    <div class="sticky-sub-items">
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span><strong>9th October 2026</strong></span>
+                                        </div>
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span>3:00 PM / 4:00 PM Onwards</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Venue & Speaker -->
+                            <div class="sticky-list-item">
+                                <span class="sticky-bullet-dash">—</span>
+                                <div class="sticky-item-body">
+                                    <strong class="item-title">Venue & Speaker Session</strong>
+                                    <div class="sticky-sub-items">
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span><strong>Sakarben Auditorium</strong> (Eng auditorium, KJSSE)</span>
+                                        </div>
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span>🎙️ <strong>Divya Gokulnath</strong> - Co-founder, BYJU'S</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eligibility -->
+                            <div class="sticky-list-item">
+                                <span class="sticky-bullet-dash">-</span>
+                                <div class="sticky-item-body">
+                                    <strong class="item-title">Eligibility & Registration</strong>
+                                    <div class="sticky-sub-items">
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span>Open to students across all years, branches, and colleges</span>
+                                        </div>
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span>Free Entry with Prior Registration</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Info -->
+                            <div class="sticky-list-item">
+                                <span class="sticky-bullet-dash">-</span>
+                                <div class="sticky-item-body">
+                                    <strong class="item-title">Contact & Helpdesk</strong>
+                                    <div class="sticky-sub-items">
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span>Pooja Vibute: <strong>+91 93721 99718</strong></span>
+                                        </div>
+                                        <div class="sticky-sub-row">
+                                            <span class="sub-bullet">•</span>
+                                            <span>Jainam Jain: <strong>+91 63762 03706</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Brush Banner -->
+                        <div class="sticky-brush-banner">
+                            <span>DREAM.</span> <span class="pink-text">BUILD.</span> <span>BLOOM. 🌱</span>
+                        </div>
+
+                        <!-- Bottom Right Folded Paper Corner -->
+                        <div class="sticky-corner-curl"></div>
+                    </div>
+                </div>
+
+                <!-- What's Your Next Chapter Callout -->
+                <div class="quote-center-wrap">
+                    <span class="section-tag-label">WHAT'S YOUR NEXT CHAPTER?</span>
+                    <h3 class="quote-heading">Maybe you already have an idea. Maybe you're building something.</h3>
+                    <p class="quote-desc">
+                        Maybe you have absolutely no idea where to begin. <strong>That's okay. Come curious.</strong><br>
+                        Your engineering degree teaches you how to solve problems. This conversation might change the way you look for them.
+                    </p>
+                    <div class="motto-tag">
+                        Dream. Build. Bloom. 🌱
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 2 Workshop Promo (Ruled Sticky Note Design) -->
+        <section class="section" id="workshop" style="padding-top: 1.5rem;">
+            <div class="container text-center max-w-content">
+                <div class="sticky-note-wrapper workshop-sticky-wrapper">
+                    <!-- Top Washi Tape Piece -->
+                    <div class="sticky-tape"></div>
+
+                    <div class="workshop-open-wrap workshop-grid-sticky">
+                        <div class="workshop-badge">AND THIS IS ONLY DAY 1 🚀</div>
+                        <div class="workshop-subheading">
+                            Day 1 gives you the story. Day 2 helps you build yours.
+                        </div>
+                        <h2 class="workshop-title">TheNextChapter - Zero to One Workshop</h2>
+                        <p class="workshop-date">
+                            📅 10th October 2026
+                        </p>
+                        <p class="workshop-description">
+                            Want to learn how to take an idea from <strong>“What if?”</strong> to something you can actually build? Join us for a hands-on entrepreneurship workshop covering <strong>idea generation, validation, business models, MVPs, AI, pitching, funding, and taking an idea from Zero to One.</strong><br><br>
+                            No startup? <strong>No problem.</strong> No idea yet? <strong>Even better - we'll start there.</strong>
+                        </p>
+
+                        <div class="workshop-journey-flow">
+                            <span class="journey-step">DREAM</span>
+                            <span class="step-arrow">→</span>
+                            <span class="journey-step">IDEATE</span>
+                            <span class="step-arrow">→</span>
+                            <span class="journey-step">VALIDATE</span>
+                            <span class="step-arrow">→</span>
+                            <span class="journey-step">BUILD</span>
+                            <span class="step-arrow">→</span>
+                            <span class="journey-step">PITCH</span>
+                            <span class="step-arrow">→</span>
+                            <span class="journey-step">BLOOM</span>
+                        </div>
+
+                        <div style="margin-top: 1.75rem;">
+                            <a href="https://unstop.com" target="_blank" rel="noopener noreferrer" class="btn-primary workshop-unstop-link" style="padding: 1rem 2.4rem;">
+                                <span>REGISTER FOR WORKSHOP ON UNSTOP</span>
+                                <span>↗</span>
+                            </a>
+                        </div>
+
+                        <!-- Bottom Right Folded Paper Corner -->
+                        <div class="sticky-corner-curl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Form Section (Hanging Plaque Design) -->
+        <section class="section register-section" id="register">
+            <div class="container max-w-form">
+                
+                <!-- Hanging Plaque Wrapper (Matching Reference Image) -->
+                <div class="hanging-plaque-wrapper">
+                    <!-- Top Hanging Metallic Pin / Peg -->
+                    <div class="hanging-peg" title="Hanging Pin"></div>
+
+                    <!-- Hanging Ropes / Cords SVG for perfect responsive rendering (Dark Purple Theme) -->
+                    <svg class="hanging-ropes-svg" viewBox="0 0 600 110" preserveAspectRatio="none" aria-hidden="true">
+                        <defs>
+                            <filter id="cord-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#180524" flood-opacity="0.45"/>
+                            </filter>
+                            <pattern id="rope-pattern" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                <rect width="8" height="8" fill="#180524" />
+                                <line x1="0" y1="0" x2="0" y2="8" stroke="#2b0c3f" stroke-width="3" />
+                                <line x1="4" y1="0" x2="4" y2="8" stroke="#3d1259" stroke-width="2" />
+                            </pattern>
+                        </defs>
+                        <!-- Left Cord -->
+                        <line x1="300" y1="18" x2="60" y2="105" stroke="url(#rope-pattern)" stroke-width="7" stroke-linecap="round" filter="url(#cord-shadow)"/>
+                        <!-- Right Cord -->
+                        <line x1="300" y1="18" x2="540" y2="105" stroke="url(#rope-pattern)" stroke-width="7" stroke-linecap="round" filter="url(#cord-shadow)"/>
+                    </svg>
+
+                    <!-- Main Hanging Plaque Board -->
+                    <div class="hanging-plaque-board">
+                        <!-- Top Corner Eyelets (Grommets) -->
+                        <div class="plaque-eyelet eyelet-left"></div>
+                        <div class="plaque-eyelet eyelet-right"></div>
+
+                        <div class="form-header text-center">
+                            <h2 class="plaque-title">Register Now!</h2>
+                            <p class="plaque-sub">Bloombox • TheNextChapter Interactive Session</p>
+                            <div class="plaque-divider"></div>
+                        </div>
+
+                        <form id="speaker-registration-form" class="registration-form" novalidate>
+                            
+                            <!-- Honeypot Anti-Spam Field -->
+                            <input type="text" name="website_hp" id="website_hp" class="hp-field" tabindex="-1" autocomplete="off">
+
+                            <!-- Row 1: Full Name & Email -->
+                            <div class="form-row-2">
+                                <!-- 1. Full Name * -->
+                                <div class="form-group">
+                                    <label for="fullName" class="form-label">
+                                        <span>FULL NAME *</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="fullName" 
+                                        class="input-control" 
+                                        placeholder="Enter your full name" 
+                                        required
+                                        autocomplete="name"
+                                    >
+                                    <div class="error-message" id="fullName-error"></div>
+                                </div>
+
+                                <!-- 2. Email Address * -->
+                                <div class="form-group">
+                                    <label for="email" class="form-label">
+                                        <span>EMAIL ADDRESS *</span>
+                                    </label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        class="input-control" 
+                                        placeholder="Enter active email address" 
+                                        required
+                                        autocomplete="email"
+                                    >
+                                    <div class="error-message" id="email-error"></div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Contact Number & College Name -->
+                            <div class="form-row-2">
+                                <!-- 3. Phone / WhatsApp Number * -->
+                                <div class="form-group">
+                                    <label for="contactNumber" class="form-label">
+                                        <span>PHONE / WHATSAPP *</span>
+                                    </label>
+                                    <input 
+                                        type="tel" 
+                                        id="contactNumber" 
+                                        class="input-control" 
+                                        placeholder="10-digit mobile number" 
+                                        required
+                                        inputmode="tel"
+                                        autocomplete="tel"
+                                    >
+                                    <div class="error-message" id="contactNumber-error"></div>
+                                </div>
+
+                                <!-- 4. College / Institution Name * -->
+                                <div class="form-group">
+                                    <label for="collegeName" class="form-label">
+                                        <span>COLLEGE / INSTITUTION *</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="collegeName" 
+                                        class="input-control" 
+                                        placeholder="e.g. K. J. Somaiya College of Engineering" 
+                                        required
+                                    >
+                                    <div class="error-message" id="collegeName-error"></div>
+                                </div>
+                            </div>
+
+                            <!-- Row 3: Course/Degree & Branch/Specialization (Dropdowns) -->
+                            <div class="form-row-2">
+                                <!-- 5. Course / Degree * -->
+                                <div class="form-group">
+                                    <label for="courseDegree" class="form-label">
+                                        <span>COURSE / DEGREE *</span>
+                                    </label>
+                                    <select id="courseDegree" class="input-control" required>
+                                        <option value="" disabled selected>Select course / degree</option>
+                                    </select>
+                                    <div class="error-message" id="courseDegree-error"></div>
+                                </div>
+
+                                <!-- 6. Branch / Specialization * -->
+                                <div class="form-group">
+                                    <label for="branchSpecialization" class="form-label">
+                                        <span>BRANCH / SPECIALIZATION *</span>
+                                    </label>
+                                    <select id="branchSpecialization" class="input-control" required>
+                                        <option value="" disabled selected>Select branch / specialization</option>
+                                    </select>
+                                    <div class="error-message" id="branchSpecialization-error"></div>
+                                </div>
+                            </div>
+
+                            <!-- Row 4: Current Year of Study & Startup Stage -->
+                            <div class="form-row-2">
+                                <!-- 7. Current Year of Study * -->
+                                <div class="form-group">
+                                    <label for="year" class="form-label">
+                                        <span>CURRENT YEAR OF STUDY *</span>
+                                    </label>
+                                    <select id="year" class="input-control" required>
+                                        <option value="" disabled selected>Select your year</option>
+                                    </select>
+                                    <div class="error-message" id="year-error"></div>
+                                </div>
+
+                                <!-- 8. Startup / Project Stage * -->
+                                <div class="form-group">
+                                    <label for="startupStage" class="form-label">
+                                        <span>STARTUP / IDEA STAGE *</span>
+                                    </label>
+                                    <select id="startupStage" class="input-control" required>
+                                        <option value="" disabled selected>Select your current stage</option>
+                                    </select>
+                                    <div class="error-message" id="startupStage-error"></div>
+                                </div>
+                            </div>
+
+                            <!-- 9. Pitch Opportunity * -->
+                            <div class="form-group">
+                                <label for="pitchOpportunity" class="form-label">
+                                    <span>WOULD YOU LIKE TO PITCH / SHARE YOUR IDEA? *</span>
+                                </label>
+                                <select id="pitchOpportunity" class="input-control" required>
+                                    <option value="" disabled selected>Select Yes / No</option>
+                                </select>
+                                <div class="error-message" id="pitchOpportunity-error"></div>
+                            </div>
+
+                            <!-- 10. Pitch Idea Description (Conditional/Optional) -->
+                            <div class="form-group" id="pitchIdea-group">
+                                <label for="pitchIdea" class="form-label">
+                                    <span>IF YES, TELL US ABOUT YOUR IDEA (OPTIONAL)</span>
+                                </label>
+                                <textarea 
+                                    id="pitchIdea" 
+                                    class="input-control" 
+                                    rows="3" 
+                                    placeholder="Briefly describe your idea, problem statement, or concept in 2–3 lines..."
+                                ></textarea>
+                                <div class="error-message" id="pitchIdea-error"></div>
+                            </div>
+
+                            <!-- 11. Question for Divya Gokulnath (Optional) -->
+                            <div class="form-group">
+                                <label for="speakerQuestion" class="form-label">
+                                    <span>ONE QUESTION FOR DIVYA GOKULNATH (OPTIONAL)</span>
+                                </label>
+                                <textarea 
+                                    id="speakerQuestion" 
+                                    class="input-control" 
+                                    rows="3" 
+                                    placeholder="What would you like to ask Divya Gokulnath during the session?..."
+                                ></textarea>
+                                <div class="error-message" id="speakerQuestion-error"></div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn-primary form-submit-btn" id="submit-btn">
+                                <span>REGISTER NOW</span>
+                            </button>
+
+                            <p class="form-footer-note text-center">
+                                Open to students across all years, branches, and colleges.<br>
+                                Keep an eye on your registered email/WhatsApp for entry updates.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="footer-title">TheNextChapter</p>
+            <p class="footer-motto">Dream. Build. Bloom. 🌱 - Team Bloombox, KJSSE</p>
+        </div>
+    </footer>
+
+    <!-- Visual Confirmation Overlay (Purple Laser Scanner) -->
+    <div class="thumbprint-overlay" id="thumbprint-overlay" role="dialog" aria-modal="true">
+        <div class="thumbprint-card">
+            
+            <div class="thumbprint-graphic-wrap">
+                <!-- Pulse Rings -->
+                <div class="pulse-ring pulse-ring-1"></div>
+                <div class="pulse-ring pulse-ring-2"></div>
+                
+                <!-- Laser Scanning Line -->
+                <div class="scan-laser-line"></div>
+
+                <!-- Stylized Fingerprint / Bloom Graphic -->
+                <svg class="thumbprint-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 50,15 A 35,35 0 0 1 85,50 A 35,35 0 0 1 75,85" />
+                    <path d="M 50,25 A 25,25 0 0 1 75,50 A 25,25 0 0 1 65,95" />
+                    <path d="M 50,35 A 15,15 0 0 1 65,50 A 15,15 0 0 1 58,100" />
+                    <path d="M 50,45 A 5,5 0 0 1 55,50 A 5,5 0 0 1 50,90" />
+                    <path d="M 30,85 A 35,35 0 0 1 15,50 A 35,35 0 0 1 50,15" />
+                    <path d="M 35,95 A 25,25 0 0 1 25,50 A 25,25 0 0 1 50,25" />
+                    <path d="M 42,100 A 15,15 0 0 1 35,50 A 15,15 0 0 1 50,35" />
+                </svg>
+
+                <!-- Checkmark Burst Icon -->
+                <div class="success-checkmark-icon">✓</div>
+
+                <!-- Error Icon -->
+                <div class="error-icon-wrap">✕</div>
+            </div>
+
+            <h3 class="thumbprint-status-title">Confirming your registration...</h3>
+            <p class="thumbprint-status-sub">Connecting to TheNextChapter network</p>
+
+            <button type="button" class="btn-secondary retry-btn" style="display: none; margin-top: 1rem;">
+                Try Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Registration Success Modal with Confirmation Message -->
+    <div class="success-modal-overlay" id="success-modal" role="dialog" aria-modal="true">
+        <div class="success-card">
+            <div class="success-badge-icon">✓</div>
+            <h2 class="success-title">You're in! Welcome to TheNextChapter. 🌱</h2>
+            <p class="success-subtitle">Your response has been successfully recorded.</p>
+
+            <div class="registration-id-box">
+                <div class="reg-id-label">Official Registration ID</div>
+                <div class="reg-id-value" id="res-registration-id">TNC26-00001</div>
+            </div>
+
+            <div class="success-details-list">
+                <div class="success-details-item">
+                    <span>Participant:</span>
+                    <strong id="res-student-name">Participant Name</strong>
+                </div>
+                <div class="success-details-item">
+                    <span>Date:</span>
+                    <strong>9th October 2026</strong>
+                </div>
+                <div class="success-details-item">
+                    <span>Time:</span>
+                    <strong>3:00 PM / 4:00 PM Onwards</strong>
+                </div>
+                <div class="success-details-item">
+                    <span>Venue:</span>
+                    <strong>Sakarben Auditorium, KJSSE</strong>
+                </div>
+                <div class="success-details-item">
+                    <span>Speaker:</span>
+                    <strong>Divya Gokulnath (Co-founder, BYJU'S)</strong>
+                </div>
+            </div>
+
+            <div class="modal-day2-promo">
+                <h4 style="color: #2b0c3f;">🚀 And remember — Day 1 gives you the story. Day 2 helps you build yours.</h4>
+                <p style="margin-top: 0.25rem; color: #4a154b;">
+                    Join the hands-on <strong>Zero to One Workshop</strong> on 10th October 2026.
+                </p>
+                <div style="margin-top: 0.75rem;">
+                    <a href="https://unstop.com" target="_blank" rel="noopener noreferrer" class="btn-primary workshop-unstop-link" style="padding: 0.6rem 1.25rem; font-size: 0.85rem; width: 100%;">
+                        <span>Register for Workshop on Unstop ↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+                Keep an eye on your registered email/WhatsApp for further updates.<br>
+                <strong>Dream. Build. Bloom.</strong> - Team Bloombox, KJSSE
+            </p>
+
+            <button type="button" class="btn-primary" id="success-done-btn" style="width: 100%;">
+                <span>SEE YOU AT SAKARBEN AUDITORIUM!</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Application JavaScript Modules -->
+    <script src="config.js"></script>
+    <script src="components/BBLogo3D.js"></script>
+    <script src="components/RegistrationForm.js"></script>
+    <script src="components/ThumbprintAnimation.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

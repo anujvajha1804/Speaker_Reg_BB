@@ -1,0 +1,16 @@
+{
+  "name": "speaker-bb-reg",
+  "version": "1.0.0",
+  "description": "TheNextChapter - Speaker Registration Portal (BloomBox KJSSE)",
+  "scripts": {
+    "dev": "npx -y serve frontend -l 3000",
+    "start": "npx -y serve frontend -l 3000",
+    "serve": "npx -y serve frontend -l 3000"
+  },
+  "keywords": [
+    "bloombox",
+    "thenextchapter"
+  ],
+  "author": "BloomBox KJSSE",
+  "license": "ISC"
+}

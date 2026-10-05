@@ -1,0 +1,242 @@
+/**
+ * TheNextChapter | In Conversation with Divya Gokulnath
+ * Main Application Controller
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Initialize Background Purple & Magenta Particle Canvas
+    initParticleCanvas();
+
+    // 2. Initialize 3D BloomBox Logo Component (if canvas present)
+    if (document.getElementById('logo-3d-canvas')) {
+        const logo3D = new BBLogo3D('logo-3d-canvas');
+    }
+
+    // 3. Trigger Hero Entrance Animations (GSAP)
+    initEntranceAnimations();
+
+    // 4. Initialize Visual Confirmation Component
+    const thumbprintHandler = new ThumbprintAnimation('thumbprint-overlay', {
+        onComplete: (result) => {
+            if (result && result.success) {
+                showSuccessModal(result);
+            }
+        },
+        onError: () => {
+            if (formHandler) formHandler.setDisabled(false);
+        }
+    });
+
+    // 5. Initialize Registration Form Component
+    const formHandler = new RegistrationForm('speaker-registration-form', {
+        allowedDomain: window.CONFIG ? window.CONFIG.ALLOWED_EMAIL_DOMAIN : "",
+        onValidSubmit: (formData) => {
+            // Lock form inputs
+            formHandler.setDisabled(true);
+
+            // Create backend fetch promise
+            const submitPromise = sendRegistrationToBackend(formData);
+
+            // Trigger visual confirmation experience with backend promise
+            thumbprintHandler.start(submitPromise);
+        }
+    });
+
+    // 6. Success Modal Close Handler
+    const successDoneBtn = document.getElementById('success-done-btn');
+    if (successDoneBtn) {
+        successDoneBtn.addEventListener('click', () => {
+            const modal = document.getElementById('success-modal');
+            if (modal) modal.classList.remove('active');
+            if (formHandler) formHandler.setDisabled(false);
+        });
+    }
+
+    // 7. Workshop CTA Links
+    const workshopBtns = document.querySelectorAll('.workshop-unstop-link');
+    workshopBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            if (window.CONFIG && window.CONFIG.DAY2_UNSTOP_URL) {
+                btn.href = window.CONFIG.DAY2_UNSTOP_URL;
+            }
+        });
+    });
+});
+
+/**
+ * Sends Registration Data to Google Apps Script Backend
+ */
+async function sendRegistrationToBackend(formData) {
+    const scriptUrl = window.CONFIG ? window.CONFIG.GOOGLE_APPS_SCRIPT_URL : "";
+
+    // Local Test Mode fallback if script URL is not configured yet
+    if (!scriptUrl || scriptUrl.includes("YOUR_DEPLOYED_SCRIPT_ID_HERE")) {
+        console.info("%c[TheNextChapter Local Test Mode] Simulated backend call.", "color: #c084fc; font-weight: bold;");
+        await new Promise(r => setTimeout(r, 1200));
+
+        // Generate simulated test registration ID
+        const testId = "TNC26-" + Math.floor(10000 + Math.random() * 90000);
+        return {
+            success: true,
+            registrationId: testId,
+            message: "Registration successful (Local Test Mode)"
+        };
+    }
+
+    try {
+        const response = await fetch(scriptUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.error("Backend submission failed:", err);
+        throw err;
+    }
+}
+
+/**
+ * Display Success Modal with Confirmation Details
+ */
+function showSuccessModal(result) {
+    const modal = document.getElementById('success-modal');
+    const regIdElem = document.getElementById('res-registration-id');
+    const studentNameElem = document.getElementById('res-student-name');
+    const fullNameInput = document.getElementById('fullName');
+
+    if (regIdElem && result.registrationId) {
+        regIdElem.textContent = result.registrationId;
+    }
+
+    if (studentNameElem && fullNameInput) {
+        studentNameElem.textContent = fullNameInput.value.trim() || "Participant";
+    }
+
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
+
+/**
+ * GSAP Staggered Entrance Animations
+ */
+function initEntranceAnimations() {
+    if (typeof gsap === 'undefined') return;
+
+    const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
+
+    tl.from('.navbar', { y: -40, opacity: 0 })
+      .from('.slanted-block', { x: -30, opacity: 0, stagger: 0.15 }, "-=0.3")
+      .from('.hero-tagline', { y: 20, opacity: 0 }, "-=0.4")
+      .from('.hero-desc', { y: 20, opacity: 0 }, "-=0.4")
+      .from('.event-pill-grid .event-pill-item', { y: 20, opacity: 0, stagger: 0.1 }, "-=0.3")
+      .from('.hero-cta-group', { y: 20, opacity: 0 }, "-=0.3")
+      .from('.hero-right', { scale: 0.85, opacity: 0, duration: 0.9 }, "-=0.7");
+}
+
+/**
+ * Purple & Violet Background Glow Particles & Ambient Floating Orbs
+ */
+function initParticleCanvas() {
+    const canvas = document.getElementById('particles-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const colors = ['#c084fc', '#e879f9', '#9333ea', '#a855f7', '#f472b6'];
+    const particleCount = Math.min(Math.floor(width / 24), 48);
+
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 2.2 + 0.9,
+            vy: -Math.random() * 0.45 - 0.15,
+            vx: (Math.random() - 0.5) * 0.25,
+            pulseSpeed: Math.random() * 0.025 + 0.015,
+            pulsePhase: Math.random() * Math.PI * 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            baseAlpha: Math.random() * 0.25 + 0.35
+        });
+    }
+
+    // Ambient floating glow orbs for soft background depth
+    const orbs = [
+        { x: width * 0.2, y: height * 0.3, radius: 200, color: 'rgba(192, 132, 252, 0.08)', vx: 0.12, vy: -0.08 },
+        { x: width * 0.8, y: height * 0.55, radius: 230, color: 'rgba(236, 72, 153, 0.06)', vx: -0.1, vy: 0.1 },
+        { x: width * 0.45, y: height * 0.85, radius: 210, color: 'rgba(147, 51, 234, 0.07)', vx: 0.08, vy: 0.09 }
+    ];
+
+    function renderParticles() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Render ambient glowing orbs
+        orbs.forEach(orb => {
+            orb.x += orb.vx;
+            orb.y += orb.vy;
+
+            if (orb.x < -orb.radius) orb.x = width + orb.radius;
+            if (orb.x > width + orb.radius) orb.x = -orb.radius;
+            if (orb.y < -orb.radius) orb.y = height + orb.radius;
+            if (orb.y > height + orb.radius) orb.y = -orb.radius;
+
+            const gradient = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.radius);
+            gradient.addColorStop(0, orb.color);
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Render sparkling floating particles
+        particles.forEach(p => {
+            p.y += p.vy;
+            p.x += p.vx;
+            p.pulsePhase += p.pulseSpeed;
+
+            if (p.y < -10) {
+                p.y = height + 10;
+                p.x = Math.random() * width;
+            }
+            if (p.x < -10) p.x = width + 10;
+            if (p.x > width + 10) p.x = -10;
+
+            const currentAlpha = p.baseAlpha + Math.sin(p.pulsePhase) * 0.15;
+            const currentRadius = p.radius + Math.sin(p.pulsePhase) * 0.4;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, Math.max(0.6, currentRadius), 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = Math.min(1, Math.max(0.15, currentAlpha));
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = p.color;
+            ctx.fill();
+        });
+
+        ctx.globalAlpha = 1.0;
+        ctx.shadowBlur = 0;
+        requestAnimationFrame(renderParticles);
+    }
+
+    renderParticles();
+}
