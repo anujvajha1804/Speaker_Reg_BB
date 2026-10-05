@@ -7,7 +7,7 @@ const CONFIG = {
     // ----------------------------------------------------
     // BACKEND & GOOGLE APPS SCRIPT SETTINGS
     // ----------------------------------------------------
-    GOOGLE_APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzi53IuG_hGMnIEjSpTBQmPQPIuoSCSgaJN_NJP0G4WrAUEGOlvX67e5xQE-B185zt-/exec",
+    GOOGLE_APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwWaYbYUoEe8lsJMLzwL1eyg3PZ8KTYeS_0SEeBJAfep3M1lIK-SsdDoAPvb6WzusJp/exec",
     
     // Domain restriction for emails (Set to "" to allow any college / domain since open to all colleges)
     ALLOWED_EMAIL_DOMAIN: "",

@@ -36,7 +36,7 @@ class ThumbprintAnimation {
 
         // Text state
         if (this.elements.title) this.elements.title.textContent = "Confirming your registration...";
-        if (this.elements.sub) this.elements.sub.textContent = "Connecting to TheNextChapter network";
+        if (this.elements.sub) this.elements.sub.style.display = "none";
 
         const scanMinTime = new Promise(resolve => setTimeout(resolve, this.options.scanDuration));
 
@@ -68,6 +68,16 @@ class ThumbprintAnimation {
 
         if (this.elements.title) this.elements.title.textContent = "Registration Confirmed! 🌱";
         if (this.elements.sub) this.elements.sub.textContent = `Welcome to TheNextChapter | ID: ${result.registrationId || ''}`;
+
+        // Initial burst on checkmark
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 50,
+                spread: 60,
+                origin: { y: 0.5 },
+                zIndex: 99999
+            });
+        }
 
         setTimeout(() => {
             this.hide();

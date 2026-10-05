@@ -106,7 +106,7 @@ async function sendRegistrationToBackend(formData) {
 }
 
 /**
- * Display Success Modal with Confirmation Details
+ * Display Success Modal with Confirmation Details & Confetti Celebration
  */
 function showSuccessModal(result) {
     const modal = document.getElementById('success-modal');
@@ -124,7 +124,69 @@ function showSuccessModal(result) {
 
     if (modal) {
         modal.classList.add('active');
+        // Trigger celebratory confetti explosion!
+        triggerConfetti();
     }
+}
+
+/**
+ * High-Energy Multi-Burst Confetti Celebration (Above Modal at z-index: 99999)
+ */
+function triggerConfetti() {
+    if (typeof confetti !== 'function') {
+        console.warn("canvas-confetti library not loaded");
+        return;
+    }
+
+    // Palette: Solid purples, vibrant pink, emerald green, golden yellow, and electric blue
+    const colors = ['#7e22ce', '#ec4899', '#a855f7', '#10b981', '#f59e0b', '#3b82f6', '#d946ef'];
+
+    // 1. Immediate Center Cannon Burst
+    confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: colors,
+        zIndex: 99999,
+        disableForReducedMotion: false
+    });
+
+    // 2. Left Side Blast
+    setTimeout(() => {
+        confetti({
+            particleCount: 70,
+            angle: 60,
+            spread: 65,
+            origin: { x: 0.05, y: 0.7 },
+            colors: colors,
+            zIndex: 99999
+        });
+    }, 180);
+
+    // 3. Right Side Blast
+    setTimeout(() => {
+        confetti({
+            particleCount: 70,
+            angle: 120,
+            spread: 65,
+            origin: { x: 0.95, y: 0.7 },
+            colors: colors,
+            zIndex: 99999
+        });
+    }, 320);
+
+    // 4. Grand Finale Shower from Top
+    setTimeout(() => {
+        confetti({
+            particleCount: 90,
+            spread: 120,
+            origin: { y: 0.25 },
+            gravity: 0.9,
+            scalar: 1.2,
+            colors: colors,
+            zIndex: 99999
+        });
+    }, 480);
 }
 
 /**

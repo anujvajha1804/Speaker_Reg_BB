@@ -1264,13 +1264,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 7. Purple Input Bars & Select Dropdowns */
 .input-control {
-    background-color: var(--poster-plum) !important;
-    background: linear-gradient(180deg, #3d1259 0%, #2b0c3f 100%) !important;
+    background-color: #2b0c3f !important;
+    background: #2b0c3f !important;
+    color-scheme: dark;
     border: 1.5px solid #581c87;
     border-radius: 6px;
     padding: 0.9rem 1.15rem;
     color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff;
+    -webkit-text-fill-color: #ffffff !important;
     font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 600;
@@ -1279,7 +1280,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 
         inset 0 2px 4px rgba(0, 0, 0, 0.45),
         0 1px 1px rgba(255, 255, 255, 0.5);
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-control:focus {
@@ -1287,6 +1288,75 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 
         inset 0 2px 4px rgba(0, 0, 0, 0.3),
         0 0 0 3px rgba(192, 132, 252, 0.35);
+}
+
+/* Browser Autofill Overrides (Chrome, Safari, Edge - prevents default light blue autofill) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active,
+.input-control:-webkit-autofill,
+.input-control:-webkit-autofill:hover, 
+.input-control:-webkit-autofill:focus, 
+.input-control:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #2b0c3f inset !important;
+    box-shadow: 0 0 0 1000px #2b0c3f inset !important;
+    border: 1.5px solid #581c87 !important;
+    border-radius: 6px !important;
+    caret-color: #ffffff !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    transition: background-color 5000000s ease-in-out 0s, color 5000000s ease-in-out 0s !important;
+}
+
+input:-webkit-autofill:focus,
+.input-control:-webkit-autofill:focus {
+    border-color: #c084fc !important;
+    -webkit-box-shadow: 0 0 0 1000px #2b0c3f inset, 0 0 0 3px rgba(192, 132, 252, 0.35) !important;
+    box-shadow: 0 0 0 1000px #2b0c3f inset, 0 0 0 3px rgba(192, 132, 252, 0.35) !important;
+}
+
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #2b0c3f inset !important;
+    box-shadow: 0 0 0 1000px #2b0c3f inset !important;
+    border: 1.5px solid #581c87 !important;
+    border-radius: 6px !important;
+    caret-color: #ffffff !important;
+    font-family: var(--font-body) !important;
+    transition: background-color 5000000s ease-in-out 0s, color 5000000s ease-in-out 0s !important;
+}
+
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #2b0c3f inset !important;
+    box-shadow: 0 0 0 1000px #2b0c3f inset !important;
+    border: 1.5px solid #581c87 !important;
+    border-radius: 6px !important;
+    transition: background-color 5000000s ease-in-out 0s, color 5000000s ease-in-out 0s !important;
+}
+
+/* Standard Spec Autofill */
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+.input-control:autofill {
+    color: #ffffff !important;
+    box-shadow: 0 0 0 1000px #2b0c3f inset !important;
+    border: 1.5px solid #581c87 !important;
+    border-radius: 6px !important;
+    caret-color: #ffffff !important;
 }
 
 .input-control::placeholder {

@@ -2,27 +2,26 @@
  * TheNextChapter | In Conversation with Divya Gokulnath
  * Google Apps Script Backend (Code.gs)
  * 
- * Handles registration data submission, duplicate email prevention,
- * concurrent lock safety, unique Registration ID generation (TNC26-XXXXX),
- * and automatic Google Sheets logging.
+ * Directly connected to Google Sheet:
+ * https://docs.google.com/spreadsheets/d/18_HAVxoha6-lqeo2lrJFKsk2uCR7o9Re4wq4hLoAD7A/edit
  */
 
 // ====================================================
 // CONFIGURATION
 // ====================================================
-// If this script is created via Extensions > Apps Script inside your Google Sheet, leave SPREADSHEET_ID as ""
-// If using a standalone script, insert your Google Spreadsheet ID here (e.g. "1A2B3C4D5E6F...")
-const SPREADSHEET_ID = ""; 
 
-// Name of the tab in Google Sheets where registrations will be stored
+// Your Google Sheet ID
+const SPREADSHEET_ID = "18_HAVxoha6-lqeo2lrJFKsk2uCR7o9Re4wq4hLoAD7A"; 
+
+// Tab name inside your Google Sheet
 const SHEET_NAME = "Registrations";
 
-// Domain restriction for student emails (Set to "" to allow any college / domain since open to all colleges)
+// Domain restriction ("" allows students from all colleges)
 const ALLOWED_EMAIL_DOMAIN = "";
 
 
 // ====================================================
-// POST ENDPOINT
+// POST ENDPOINT (Handles Form Submission)
 // ====================================================
 function doPost(e) {
   try {
@@ -147,7 +146,6 @@ function doPost(e) {
     // 3. Access Google Sheet with Lock to Prevent Concurrent Collisions
     const sheet = getOrCreateSheet();
     const lock = LockService.getScriptLock();
-    // Wait up to 10 seconds for lock to avoid race conditions
     lock.waitLock(10000);
 
     try {
@@ -167,7 +165,7 @@ function doPost(e) {
       }
 
       // 5. Generate Unique Registration ID (e.g. TNC26-00001)
-      const nextIndex = lastRow; // Since Row 1 is the header
+      const nextIndex = lastRow; // Since Row 1 is header
       const registrationId = "TNC26-" + padZero(nextIndex, 5);
 
       // 6. Append New Row to Google Sheet
@@ -212,7 +210,7 @@ function doPost(e) {
   }
 }
 
-// GET Endpoint for health check / status verification
+// GET Endpoint for status check
 function doGet() {
   return ContentService
     .createTextOutput("TheNextChapter | Bloombox Google Apps Script Backend is active and running.")
@@ -220,27 +218,29 @@ function doGet() {
 }
 
 // ====================================================
+// ONE-CLICK PERMISSION & INITIALIZATION FUNCTION
+// ====================================================
+function testPermission() {
+  const sheet = getOrCreateSheet();
+  const ss = sheet.getParent();
+  Logger.log("Successfully connected to Google Sheet!");
+  Logger.log("Sheet Name: " + ss.getName());
+  Logger.log("Sheet URL: " + ss.getUrl());
+}
+
+// ====================================================
 // HELPER FUNCTIONS
 // ====================================================
 
 function getOrCreateSheet() {
-  let ss;
-  if (SPREADSHEET_ID && SPREADSHEET_ID.trim() !== "") {
-    ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-  } else {
-    ss = SpreadsheetApp.getActiveSpreadsheet();
-  }
-
-  if (!ss) {
-    throw new Error("Spreadsheet not found. Please provide a valid SPREADSHEET_ID or run inside Google Sheets.");
-  }
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
 
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
   }
 
-  // Set default column headers and styling if sheet is newly created
+  // Set default column headers and styling if sheet is newly created or empty
   if (sheet.getLastRow() === 0) {
     const headers = [
       "Timestamp",
