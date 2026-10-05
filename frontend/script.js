@@ -220,8 +220,9 @@ function initEntranceAnimations() {
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
 
-    tl.from('.hero-eyebrow', { y: -15, opacity: 0, duration: 0.6 })
-      .from('.hero-grand-title', { y: -20, opacity: 0, duration: 0.8 }, "-=0.3")
+    tl.from('.hero-top-logo', { scale: 0.8, y: -20, opacity: 0, duration: 0.7 })
+      .from('.hero-eyebrow', { y: -12, opacity: 0, duration: 0.5 }, "-=0.3")
+      .from('.hero-grand-title', { y: -18, opacity: 0, duration: 0.7 }, "-=0.3")
       .from('.hero-italic-subtitle', { y: 15, opacity: 0, duration: 0.6 }, "-=0.4")
       .from('.hero-tagline-heading', { y: 20, opacity: 0, duration: 0.6 }, "-=0.3")
       .from('.hero-desc', { y: 20, opacity: 0 }, "-=0.3")

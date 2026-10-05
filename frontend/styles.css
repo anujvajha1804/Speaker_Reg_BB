@@ -274,7 +274,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Grand Typography Presentation Header --- */
 .hero-header-grand {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -284,21 +283,23 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
-.hero-corner-logo {
-    position: absolute;
-    top: -12px;
-    right: 25px;
-    width: 52px;
-    height: 52px;
-    pointer-events: none;
+.hero-top-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.35rem;
+}
+
+.bb-top-logo-img {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 20px rgba(126, 34, 206, 0.25));
     transition: transform var(--transition-fast);
 }
 
-.bb-corner-logo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(126, 34, 206, 0.22));
+.bb-top-logo-img:hover {
+    transform: translateY(-3px) scale(1.04);
 }
 
 .hero-eyebrow {
@@ -2022,11 +2023,13 @@ html, body {
         margin-bottom: 0.15rem;
     }
 
-    .hero-corner-logo {
-        top: -10px;
-        right: 4px;
-        width: 36px;
-        height: 36px;
+    .hero-top-logo {
+        margin-bottom: 0.25rem;
+    }
+
+    .bb-top-logo-img {
+        width: 70px;
+        height: 70px;
     }
 
     .hero-eyebrow {
