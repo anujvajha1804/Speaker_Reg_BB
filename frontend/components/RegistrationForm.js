@@ -42,7 +42,6 @@ class RegistrationForm {
             pitchTitle: document.getElementById('pitchTitle'),
             pitchStage: document.getElementById('pitchStage'),
             pitchDeckFile: document.getElementById('pitchDeckFile'),
-            pitchDeckLink: document.getElementById('pitchDeckLink'),
             pitchWhyDivya: document.getElementById('pitchWhyDivya'),
 
             honeypot: document.getElementById('website_hp')
@@ -528,18 +527,17 @@ class RegistrationForm {
             }
         }
 
-        // Validate pitch deck upload or link if pitching
+        // Validate pitch deck upload if pitching
         if (isPitching) {
-            const deckLink = this.fields.pitchDeckLink ? this.fields.pitchDeckLink.value.trim() : "";
-            const hasDeck = this.uploadedFileName !== "" || deckLink !== "";
+            const hasDeck = this.uploadedFileName !== "";
             const deckError = document.getElementById('pitchDeck-error');
             if (!hasDeck) {
                 isFormValid = false;
                 if (deckError) {
-                    deckError.textContent = "Please upload a PDF pitch deck or paste a link.";
+                    deckError.textContent = "Please upload your PDF pitch deck (max 5 slides).";
                     deckError.classList.add('show');
                 }
-                if (!firstInvalidField) firstInvalidField = this.fields.pitchDeckLink;
+                if (!firstInvalidField) firstInvalidField = this.fields.pitchDeckFile;
             } else if (deckError) {
                 deckError.textContent = "";
                 deckError.classList.remove('show');
@@ -581,7 +579,6 @@ class RegistrationForm {
             pitchStage: isPitching && this.fields.pitchStage ? this.fields.pitchStage.value : "",
             pitchDeckFile: this.uploadedFileName,
             pitchDeckBase64: this.uploadedFileBase64,
-            pitchDeckLink: isPitching && this.fields.pitchDeckLink ? this.fields.pitchDeckLink.value.trim() : "",
             pitchWhyDivya: isPitching && this.fields.pitchWhyDivya ? this.fields.pitchWhyDivya.value.trim() : "",
 
             source: this.getURLParameter('source') || 'speaker_session_link'
