@@ -256,7 +256,7 @@ function getOrCreateSheet() {
       "BYJU'S Familiarity",
       "AI Education Concerns",
       "AI Agents Used",
-      "Day 2 (Unstop) Status",
+      "Zero to One Workshop (Unstop) Status",
       "Pitch Opportunity",
       "Pitch Category",
       "Pitch Idea Title",

@@ -440,6 +440,47 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--poster-plum);
 }
 
+/* --- Hero Quick Register CTA Button --- */
+.hero-cta-wrap {
+    margin-top: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-hero-quick-reg {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #2b0c3f;
+    color: #ffffff !important;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.65rem 1.6rem;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 14px rgba(43, 12, 63, 0.2);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-hero-quick-reg:hover {
+    transform: translateY(-2px);
+    background: #581c87;
+    box-shadow: 0 8px 24px rgba(88, 28, 135, 0.3);
+}
+
+.btn-hero-quick-reg .btn-arrow {
+    font-size: 1.1rem;
+    transition: transform var(--transition-fast);
+}
+
+.btn-hero-quick-reg:hover .btn-arrow {
+    transform: translateY(2px);
+}
+
 /* --- Sections General --- */
 .section {
     padding: 2.5rem 0;
