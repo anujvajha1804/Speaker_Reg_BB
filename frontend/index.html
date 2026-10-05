@@ -474,12 +474,20 @@
                             <!-- Honeypot Anti-Spam Field -->
                             <input type="text" name="website_hp" id="website_hp" class="hp-field" tabindex="-1" autocomplete="off">
 
+                            <!-- ========================================== -->
+                            <!-- SECTION 1: ABOUT YOU                       -->
+                            <!-- ========================================== -->
+                            <div class="form-section-banner">
+                                <span class="form-section-badge">Section 1</span>
+                                <span class="form-section-title-text">About You</span>
+                            </div>
+
                             <!-- Row 1: Full Name & Email -->
                             <div class="form-row-2">
                                 <!-- 1. Full Name * -->
                                 <div class="form-group">
                                     <label for="fullName" class="form-label">
-                                        <span>FULL NAME *</span>
+                                        <span>1. FULL NAME *</span>
                                     </label>
                                     <input 
                                         type="text" 
@@ -495,7 +503,7 @@
                                 <!-- 2. Email Address * -->
                                 <div class="form-group">
                                     <label for="email" class="form-label">
-                                        <span>EMAIL ADDRESS *</span>
+                                        <span>2. EMAIL ID *</span>
                                     </label>
                                     <input 
                                         type="email" 
@@ -511,7 +519,7 @@
 
                             <!-- Row 2: Contact Number & College Name -->
                             <div class="form-row-2">
-                                <!-- 3. Phone / WhatsApp Number * -->
+                                <!-- Phone / WhatsApp Number * -->
                                 <div class="form-group">
                                     <label for="contactNumber" class="form-label">
                                         <span>PHONE / WHATSAPP *</span>
@@ -528,10 +536,10 @@
                                     <div class="error-message" id="contactNumber-error"></div>
                                 </div>
 
-                                <!-- 4. College / Institution Name * -->
+                                <!-- 3. College / Institution Name * -->
                                 <div class="form-group">
                                     <label for="collegeName" class="form-label">
-                                        <span>COLLEGE / INSTITUTION *</span>
+                                        <span>3. COLLEGE NAME *</span>
                                     </label>
                                     <input 
                                         type="text" 
@@ -544,71 +552,122 @@
                                 </div>
                             </div>
 
-                            <!-- Row 3: Course/Degree & Branch/Specialization (Dropdowns) -->
+                            <!-- Row 3: Engineering Branch & Division -->
                             <div class="form-row-2">
-                                <!-- 5. Course / Degree * -->
-                                <div class="form-group">
-                                    <label for="courseDegree" class="form-label">
-                                        <span>COURSE / DEGREE *</span>
-                                    </label>
-                                    <select id="courseDegree" class="input-control" required>
-                                        <option value="" disabled selected>Select course / degree</option>
-                                    </select>
-                                    <div class="error-message" id="courseDegree-error"></div>
-                                </div>
-
-                                <!-- 6. Branch / Specialization * -->
+                                <!-- Branch (Optional for non-eng) -->
                                 <div class="form-group">
                                     <label for="branchSpecialization" class="form-label">
-                                        <span>BRANCH / SPECIALIZATION *</span>
+                                        <span>BRANCH (IF ENGINEERING)</span>
                                     </label>
-                                    <select id="branchSpecialization" class="input-control" required>
-                                        <option value="" disabled selected>Select branch / specialization</option>
+                                    <select id="branchSpecialization" class="input-control">
+                                        <option value="" selected>Select branch (Optional)</option>
                                     </select>
                                     <div class="error-message" id="branchSpecialization-error"></div>
                                 </div>
+
+                                <!-- Division (Optional) -->
+                                <div class="form-group">
+                                    <label for="division" class="form-label">
+                                        <span>DIVISION</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="division" 
+                                        class="input-control" 
+                                        placeholder="e.g. A, B, C (Optional)"
+                                    >
+                                    <div class="error-message" id="division-error"></div>
+                                </div>
                             </div>
 
-                            <!-- Row 4: Current Year of Study & Startup Stage -->
+                            <!-- Row 4: Year of Study & Course/Degree -->
                             <div class="form-row-2">
-                                <!-- 7. Current Year of Study * -->
+                                <!-- 4. Year of Study * -->
                                 <div class="form-group">
                                     <label for="year" class="form-label">
-                                        <span>CURRENT YEAR OF STUDY *</span>
+                                        <span>4. YEAR OF STUDY *</span>
                                     </label>
                                     <select id="year" class="input-control" required>
-                                        <option value="" disabled selected>Select your year</option>
+                                        <option value="" disabled selected>Select your year of study</option>
                                     </select>
                                     <div class="error-message" id="year-error"></div>
                                 </div>
 
-                                <!-- 8. Startup / Project Stage * -->
+                                <!-- 5. Programme / Course * -->
                                 <div class="form-group">
-                                    <label for="startupStage" class="form-label">
-                                        <span>STARTUP / IDEA STAGE *</span>
+                                    <label for="courseDegree" class="form-label">
+                                        <span>5. PROGRAMME / COURSE *</span>
                                     </label>
-                                    <select id="startupStage" class="input-control" required>
-                                        <option value="" disabled selected>Select your current stage</option>
-                                    </select>
-                                    <div class="error-message" id="startupStage-error"></div>
+                                    <input 
+                                        type="text" 
+                                        id="courseDegree" 
+                                        class="input-control" 
+                                        placeholder="e.g. BTech, BSc, MBA, Diploma" 
+                                        required
+                                    >
+                                    <div class="error-message" id="courseDegree-error"></div>
                                 </div>
                             </div>
 
-                            <!-- 9. Pitch Opportunity * -->
-                            <div class="form-group">
-                                <label for="pitchOpportunity" class="form-label">
-                                    <span>WOULD YOU LIKE TO PITCH / SHARE YOUR IDEA? *</span>
-                                </label>
-                                <select id="pitchOpportunity" class="input-control" required>
-                                    <option value="" disabled selected>Select Yes / No</option>
-                                </select>
-                                <div class="error-message" id="pitchOpportunity-error"></div>
+                            <!-- ========================================== -->
+                            <!-- SECTION 2: AI AND LEARNING                 -->
+                            <!-- ========================================== -->
+                            <div class="form-section-banner" style="margin-top: 2rem;">
+                                <span class="form-section-badge">Section 2</span>
+                                <span class="form-section-title-text">AI and Learning</span>
                             </div>
 
-                            <!-- 10. Day 2 Workshop (Unstop) Status * -->
+                            <div class="form-row-2">
+                                <!-- 6. Familiarity with AI Agents * -->
+                                <div class="form-group">
+                                    <label for="aiFamiliarity" class="form-label">
+                                        <span>6. HOW FAMILIAR WITH AI AGENTS? *</span>
+                                    </label>
+                                    <select id="aiFamiliarity" class="input-control" required>
+                                        <option value="" disabled selected>Select familiarity level</option>
+                                    </select>
+                                    <div class="error-message" id="aiFamiliarity-error"></div>
+                                </div>
+
+                                <!-- 9. Familiarity with BYJU'S * -->
+                                <div class="form-group">
+                                    <label for="byjusFamiliarity" class="form-label">
+                                        <span>9. FAMILIARITY WITH BYJU'S *</span>
+                                    </label>
+                                    <select id="byjusFamiliarity" class="input-control" required>
+                                        <option value="" disabled selected>Select familiarity</option>
+                                    </select>
+                                    <div class="error-message" id="byjusFamiliarity-error"></div>
+                                </div>
+                            </div>
+
+                            <!-- 7. Biggest Concern About AI in Education * -->
                             <div class="form-group">
+                                <label for="aiEducationConcerns" class="form-label">
+                                    <span>7. BIGGEST CONCERN ABOUT AI IN EDUCATION? *</span>
+                                </label>
+                                <select id="aiEducationConcerns" class="input-control" required>
+                                    <option value="" disabled selected>Select your major concern</option>
+                                </select>
+                                <div class="error-message" id="aiEducationConcerns-error"></div>
+                            </div>
+
+                            <!-- 8. Which AI Agents do you currently use? -->
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <span>8. WHICH AI AGENTS DO YOU CURRENTLY USE? (SELECT ALL THAT APPLY)</span>
+                                </label>
+                                <div class="chip-grid" id="ai-agents-chip-grid">
+                                    <!-- Populated dynamically via JS -->
+                                </div>
+                                <input type="hidden" id="aiAgentsUsed" name="aiAgentsUsed" value="">
+                                <div class="error-message" id="aiAgentsUsed-error"></div>
+                            </div>
+
+                            <!-- Day 2 Workshop (Unstop) Status * -->
+                            <div class="form-group" style="margin-top: 0.5rem;">
                                 <label for="unstopRegistered" class="form-label">
-                                    <span>HAVE YOU ALREADY REGISTERED FOR DAY 2 (ZERO TO ONE WORKSHOP ON UNSTOP)? *</span>
+                                    <span>HAVE YOU ALREADY REGISTERED FOR DAY 2 (WORKSHOP ON UNSTOP)? *</span>
                                 </label>
                                 <select id="unstopRegistered" class="input-control" required>
                                     <option value="" disabled selected>Select an option</option>
@@ -616,36 +675,108 @@
                                 <div class="error-message" id="unstopRegistered-error"></div>
                             </div>
 
-                            <!-- 11. Pitch Idea Description (Conditional/Optional) -->
-                            <div class="form-group" id="pitchIdea-group">
-                                <label for="pitchIdea" class="form-label">
-                                    <span>IF YES, TELL US ABOUT YOUR IDEA (OPTIONAL)</span>
-                                </label>
-                                <textarea 
-                                    id="pitchIdea" 
-                                    class="input-control" 
-                                    rows="3" 
-                                    placeholder="Briefly describe your idea, problem statement, or concept in 2–3 lines..."
-                                ></textarea>
-                                <div class="error-message" id="pitchIdea-error"></div>
+                            <!-- ========================================== -->
+                            <!-- SECTION 3: PITCH TO DIVYA                  -->
+                            <!-- ========================================== -->
+                            <div class="form-section-banner" style="margin-top: 2rem;">
+                                <span class="form-section-badge">Section 3</span>
+                                <span class="form-section-title-text">Pitch To Divya (Optional)</span>
                             </div>
 
-                            <!-- 11. Question for Divya Gokulnath (Optional) -->
+                            <!-- 10. Pitch Participation Choice * -->
                             <div class="form-group">
-                                <label for="speakerQuestion" class="form-label">
-                                    <span>ONE QUESTION FOR DIVYA GOKULNATH (OPTIONAL)</span>
+                                <label for="pitchOpportunity" class="form-label">
+                                    <span>10. DO YOU WANT TO PARTICIPATE IN "PITCH TO DIVYA"? *</span>
                                 </label>
-                                <textarea 
-                                    id="speakerQuestion" 
-                                    class="input-control" 
-                                    rows="3" 
-                                    placeholder="What would you like to ask Divya Gokulnath during the session?..."
-                                ></textarea>
-                                <div class="error-message" id="speakerQuestion-error"></div>
+                                <select id="pitchOpportunity" class="input-control" required>
+                                    <option value="" disabled selected>Select Yes / No</option>
+                                </select>
+                                <div class="error-message" id="pitchOpportunity-error"></div>
+                            </div>
+
+                            <!-- Pitch Sub-Questions (Only visible if Yes is selected) -->
+                            <div id="pitch-details-card" class="pitch-container-card" style="display: none;">
+                                <div class="pitch-intro-box">
+                                    <strong>💡 Have an idea worth putting on the table?</strong><br>
+                                    This is your opportunity to pitch an MVP, startup concept, product idea, or AI-based solution directly to Divya Gokulnath. Selected students will present their idea one-on-one. Clarity of thought, originality, and impact are what count.
+                                </div>
+
+                                <!-- 11. What are you pitching? & 12. Idea Title -->
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label for="pitchType" class="form-label">
+                                            <span>11. WHAT ARE YOU PITCHING? *</span>
+                                        </label>
+                                        <select id="pitchType" class="input-control">
+                                            <option value="" disabled selected>Select pitch category</option>
+                                        </select>
+                                        <div class="error-message" id="pitchType-error"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pitchTitle" class="form-label">
+                                            <span>12. IDEA NAME / TITLE *</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="pitchTitle" 
+                                            class="input-control" 
+                                            placeholder="e.g. EduAI / SmartWaste / EcoFleet"
+                                        >
+                                        <div class="error-message" id="pitchTitle-error"></div>
+                                    </div>
+                                </div>
+
+                                <!-- 13. Current Stage of Idea -->
+                                <div class="form-group">
+                                    <label for="pitchStage" class="form-label">
+                                        <span>13. CURRENT STAGE OF YOUR IDEA *</span>
+                                    </label>
+                                    <select id="pitchStage" class="input-control">
+                                        <option value="" disabled selected>Select current stage</option>
+                                    </select>
+                                    <div class="error-message" id="pitchStage-error"></div>
+                                </div>
+
+                                <!-- 14. Upload Pitch Deck (PDF / Drive Link) -->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span>14. UPLOAD PITCH DECK (MAX 5 SLIDES, PDF ONLY) *</span>
+                                    </label>
+                                    <div class="file-upload-input-wrap" id="drop-zone-wrap">
+                                        <span id="file-upload-prompt">📄 Click or Drag to Upload PDF Pitch Deck (Max 100MB)</span>
+                                        <span class="file-chosen-label" id="file-name-display" style="display: none;"></span>
+                                        <input type="file" id="pitchDeckFile" accept=".pdf,application/pdf">
+                                    </div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <input 
+                                            type="url" 
+                                            id="pitchDeckLink" 
+                                            class="input-control" 
+                                            placeholder="Or paste public Google Drive / Presentation Link"
+                                        >
+                                    </div>
+                                    <div class="error-message" id="pitchDeck-error"></div>
+                                </div>
+
+                                <!-- 15. Why should Divya hear your pitch? (Max 50 words) -->
+                                <div class="form-group">
+                                    <label for="pitchWhyDivya" class="form-label">
+                                        <span>15. IN 50 WORDS OR LESS, WHY SHOULD DIVYA HEAR YOUR PITCH? *</span>
+                                    </label>
+                                    <textarea 
+                                        id="pitchWhyDivya" 
+                                        class="input-control" 
+                                        rows="3" 
+                                        placeholder="Tell us what makes your problem and solution compelling (max 50 words)..."
+                                    ></textarea>
+                                    <div class="word-counter-wrap" id="pitch-word-counter">0 / 50 words</div>
+                                    <div class="error-message" id="pitchWhyDivya-error"></div>
+                                </div>
                             </div>
 
                             <!-- Submit Button -->
-                            <button type="submit" class="btn-primary form-submit-btn" id="submit-btn">
+                            <button type="submit" class="btn-primary form-submit-btn" id="submit-btn" style="margin-top: 1.5rem;">
                                 <span>REGISTER NOW</span>
                             </button>
 

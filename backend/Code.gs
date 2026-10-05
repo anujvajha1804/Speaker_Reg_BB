@@ -45,18 +45,32 @@ function doPost(e) {
       });
     }
 
+    // Section 1: About You
     const fullName = (data.fullName || "").trim();
     const email = (data.email || "").trim().toLowerCase();
     const contactNumber = (data.contactNumber || "").trim();
     const collegeName = (data.collegeName || "").trim();
-    const courseDegree = (data.courseDegree || "").trim();
     const branchSpecialization = (data.branchSpecialization || data.branch || "").trim();
+    const division = (data.division || "").trim();
     const year = (data.year || "").trim();
-    const startupStage = (data.startupStage || "").trim();
-    const pitchOpportunity = (data.pitchOpportunity || "").trim();
-    const pitchIdea = (data.pitchIdea || "").trim();
-    const speakerQuestion = (data.speakerQuestion || "").trim();
+    const courseDegree = (data.courseDegree || "").trim();
+
+    // Section 2: AI & Learning
+    const aiFamiliarity = (data.aiFamiliarity || "").trim();
+    const byjusFamiliarity = (data.byjusFamiliarity || "").trim();
+    const aiEducationConcerns = (data.aiEducationConcerns || "").trim();
+    const aiAgentsUsed = (data.aiAgentsUsed || "").trim();
     const unstopRegistered = (data.unstopRegistered || "").trim();
+
+    // Section 3: Pitch To Divya
+    const pitchOpportunity = (data.pitchOpportunity || "").trim();
+    const pitchType = (data.pitchType || "").trim();
+    const pitchTitle = (data.pitchTitle || "").trim();
+    const pitchStage = (data.pitchStage || "").trim();
+    const pitchDeckFile = (data.pitchDeckFile || "").trim();
+    const pitchDeckLink = (data.pitchDeckLink || "").trim();
+    const pitchWhyDivya = (data.pitchWhyDivya || "").trim();
+
     const source = (data.source || "speaker_session_link").trim();
 
     // 2. Server-Side Data Validation
@@ -104,43 +118,19 @@ function doPost(e) {
       });
     }
 
-    if (!courseDegree) {
-      return createJsonResponse({
-        success: false,
-        error: "VALIDATION_ERROR",
-        message: "Please select your course/degree."
-      });
-    }
-
-    if (!branchSpecialization) {
-      return createJsonResponse({
-        success: false,
-        error: "VALIDATION_ERROR",
-        message: "Please select your branch/specialization."
-      });
-    }
-
     if (!year) {
       return createJsonResponse({
         success: false,
         error: "VALIDATION_ERROR",
-        message: "Please select your current year of study."
+        message: "Please select your year of study."
       });
     }
 
-    if (!startupStage) {
+    if (!courseDegree) {
       return createJsonResponse({
         success: false,
         error: "VALIDATION_ERROR",
-        message: "Please select where you are with your startup/idea."
-      });
-    }
-
-    if (!pitchOpportunity) {
-      return createJsonResponse({
-        success: false,
-        error: "VALIDATION_ERROR",
-        message: "Please select whether you would like to pitch during the session."
+        message: "Please enter your programme / course."
       });
     }
 
@@ -178,14 +168,21 @@ function doPost(e) {
         email,
         contactNumber,
         collegeName,
-        courseDegree,
         branchSpecialization,
+        division,
         year,
-        startupStage,
-        pitchOpportunity,
-        pitchIdea,
-        speakerQuestion,
+        courseDegree,
+        aiFamiliarity,
+        byjusFamiliarity,
+        aiEducationConcerns,
+        aiAgentsUsed,
         unstopRegistered,
+        pitchOpportunity,
+        pitchType,
+        pitchTitle,
+        pitchStage,
+        pitchDeckFile || pitchDeckLink,
+        pitchWhyDivya,
         source
       ];
 
@@ -251,14 +248,21 @@ function getOrCreateSheet() {
       "Email",
       "Contact Number",
       "College / Institution",
-      "Course / Degree",
-      "Branch / Specialization",
+      "Branch",
+      "Division",
       "Year of Study",
-      "Startup / Idea Stage",
+      "Programme / Course",
+      "AI Agents Familiarity",
+      "BYJU'S Familiarity",
+      "AI Education Concerns",
+      "AI Agents Used",
+      "Day 2 (Unstop) Status",
       "Pitch Opportunity",
-      "Pitch Idea Description",
-      "Question for Divya Gokulnath",
-      "Day 2 Workshop (Unstop) Status",
+      "Pitch Category",
+      "Pitch Idea Title",
+      "Pitch Stage",
+      "Pitch Deck / Link",
+      "Why Hear Pitch (50 Words)",
       "Source"
     ];
     sheet.appendRow(headers);

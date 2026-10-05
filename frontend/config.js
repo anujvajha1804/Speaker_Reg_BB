@@ -39,44 +39,87 @@ const CONFIG = {
         "First Year",
         "Second Year",
         "Third Year",
-        "Fourth Year"
-    ],
-
-    COURSES: [
-        "B.Tech / B.E.",
-        "M.Tech / M.E.",
-        "BBA / MBA",
-        "B.Sc / M.Sc",
-        "BCA / MCA",
-        "Diploma",
+        "Fourth Year",
+        "Postgraduate",
         "Other"
     ],
 
     BRANCHES: [
-        "Computer Engineering",
-        "Information Technology",
-        "Artificial Intelligence & Data Science",
-        "Electronics & Telecommunication",
-        "Electronics and Computer Engineering",
-        "Mechanical Engineering",
-        "Computer Science and Business Systems",
-        "Computer and Communication Engineering",
-        "Robotics and Artificial Intelligence",
-        "VLSI Design and Technology",
-        "Civil Engineering",
+        "Computer Engineering (COMPS)",
+        "Information Technology (IT)",
+        "Artificial Intelligence & Data Science (AI & DS)",
+        "Computer Science & Business Systems (CSBS)",
+        "Computer & Communication Engineering (CCE)",
+        "Robotics & Artificial Intelligence (RAI)",
+        "Electronics & Computer Engineering (EXCP)",
+        "Electronics & Telecommunication Engineering (EXTC)",
+        "Electronics Engineering (VLSI Design & Technology)",
+        "Mechanical Engineering (MECH)",
         "Other"
     ],
 
-    STARTUP_STAGES: [
-        "I'm already working on one",
-        "I have an idea, but haven't started yet",
-        "I don't have one yet, but I want to explore",
-        "I'm just curious about entrepreneurship"
+    AI_FAMILIARITY: [
+        "I use AI Agents regularly",
+        "I have experimented with AI Agents",
+        "I understand the concept but haven't used them much",
+        "I have heard of AI Agents but don't know much about them",
+        "This is completely new to me"
+    ],
+
+    AI_CONCERNS: [
+        "Over-dependence on AI",
+        "Reduced critical thinking",
+        "Accuracy / misinformation",
+        "Privacy concerns",
+        "Academic integrity",
+        "Lack of human interaction",
+        "I don't have any major concerns",
+        "Other"
+    ],
+
+    AI_AGENTS: [
+        "ChatGPT",
+        "Claude",
+        "Gemini",
+        "Perplexity",
+        "Microsoft Copilot",
+        "GitHub Copilot",
+        "Cursor",
+        "Manus",
+        "Other",
+        "I don't currently use any AI Agents"
+    ],
+
+    BYJUS_FAMILIARITY: [
+        "I have used BYJU'S",
+        "I know about BYJU'S but haven't used it",
+        "I have only heard the name",
+        "I wasn't familiar with BYJU'S"
     ],
 
     PITCH_OPTIONS: [
-        "Yes",
-        "No"
+        "No, I would only like to attend the session",
+        "Yes, I would like to pitch my idea"
+    ],
+
+    PITCH_TYPES: [
+        "Startup / Business Idea",
+        "MVP / Working Prototype",
+        "Product Idea",
+        "Technology / AI-based Solution",
+        "Social Impact Idea",
+        "EdTech Idea",
+        "Other"
+    ],
+
+    PITCH_STAGES: [
+        "Just an idea",
+        "Research / validation stage",
+        "Prototype",
+        "MVP developed",
+        "Currently being tested",
+        "Already launched",
+        "Other"
     ],
 
     UNSTOP_OPTIONS: [

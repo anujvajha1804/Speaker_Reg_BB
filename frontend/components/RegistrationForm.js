@@ -1,7 +1,9 @@
 /**
  * TheNextChapter - Interactive Registration Form Component
- * Handles client-side validation for all event registration fields,
- * inline error feedback, honeypot anti-spam, and submission locks.
+ * Handles client-side validation for all 3 Sections:
+ * Section 1: About You
+ * Section 2: AI and Learning
+ * Section 3: Pitch to Divya (Conditional)
  */
 
 class RegistrationForm {
@@ -13,20 +15,36 @@ class RegistrationForm {
         }, options);
 
         this.isSubmitting = false;
+        this.uploadedFileBase64 = null;
+        this.uploadedFileName = "";
 
         this.fields = {
+            // Section 1: About You
             fullName: document.getElementById('fullName'),
             email: document.getElementById('email'),
             contactNumber: document.getElementById('contactNumber'),
             collegeName: document.getElementById('collegeName'),
-            courseDegree: document.getElementById('courseDegree'),
             branchSpecialization: document.getElementById('branchSpecialization'),
+            division: document.getElementById('division'),
             year: document.getElementById('year'),
-            startupStage: document.getElementById('startupStage'),
-            pitchOpportunity: document.getElementById('pitchOpportunity'),
+            courseDegree: document.getElementById('courseDegree'),
+
+            // Section 2: AI & Learning
+            aiFamiliarity: document.getElementById('aiFamiliarity'),
+            byjusFamiliarity: document.getElementById('byjusFamiliarity'),
+            aiEducationConcerns: document.getElementById('aiEducationConcerns'),
+            aiAgentsUsed: document.getElementById('aiAgentsUsed'),
             unstopRegistered: document.getElementById('unstopRegistered'),
-            pitchIdea: document.getElementById('pitchIdea'),
-            speakerQuestion: document.getElementById('speakerQuestion'),
+
+            // Section 3: Pitch to Divya (Optional / Conditional)
+            pitchOpportunity: document.getElementById('pitchOpportunity'),
+            pitchType: document.getElementById('pitchType'),
+            pitchTitle: document.getElementById('pitchTitle'),
+            pitchStage: document.getElementById('pitchStage'),
+            pitchDeckFile: document.getElementById('pitchDeckFile'),
+            pitchDeckLink: document.getElementById('pitchDeckLink'),
+            pitchWhyDivya: document.getElementById('pitchWhyDivya'),
+
             honeypot: document.getElementById('website_hp')
         };
 
@@ -36,30 +54,40 @@ class RegistrationForm {
     init() {
         if (!this.form) return;
 
-        // Populate dropdown options from CONFIG
+        // 1. Populate dropdown options from CONFIG
         this.populateDropdowns();
 
-        // Dynamic toggle for pitchIdea field based on pitchOpportunity
+        // 2. Initialize AI Agents chips (Section 2)
+        this.initAIAgentChips();
+
+        // 3. Dynamic toggle for pitch section
         this.setupPitchToggle();
 
-        // Auto-detect source from URL and pre-select Unstop if coming from Unstop
+        // 4. Live word counter for Pitch Why Divya
+        this.setupWordCounter();
+
+        // 5. File upload listener
+        this.setupFileUpload();
+
+        // 6. Pre-select Unstop if URL has ?source=unstop
         this.checkURLParams();
 
-        // Attach real-time validation on blur, input & change
-        const requiredKeys = [
+        // 7. Attach real-time validation listeners
+        const basicKeys = [
             'fullName', 
             'email', 
             'contactNumber', 
             'collegeName', 
-            'courseDegree', 
-            'branchSpecialization', 
             'year', 
-            'startupStage', 
-            'pitchOpportunity',
-            'unstopRegistered'
+            'courseDegree',
+            'aiFamiliarity',
+            'byjusFamiliarity',
+            'aiEducationConcerns',
+            'unstopRegistered',
+            'pitchOpportunity'
         ];
         
-        requiredKeys.forEach(key => {
+        basicKeys.forEach(key => {
             const field = this.fields[key];
             if (field) {
                 field.addEventListener('blur', () => this.validateField(key));
@@ -94,18 +122,21 @@ class RegistrationForm {
     populateDropdowns() {
         if (!window.CONFIG) return;
 
-        // Populate Courses / Degrees
-        if (this.fields.courseDegree && this.fields.courseDegree.options.length <= 1 && window.CONFIG.COURSES) {
-            window.CONFIG.COURSES.forEach(c => {
+        const populateSelect = (element, items, defaultLabel = "Select an option") => {
+            if (!element || !items) return;
+            // Keep first disabled default option if present
+            element.innerHTML = `<option value="" disabled selected>${defaultLabel}</option>`;
+            items.forEach(item => {
                 const opt = document.createElement('option');
-                opt.value = c;
-                opt.textContent = c;
-                this.fields.courseDegree.appendChild(opt);
+                opt.value = item;
+                opt.textContent = item;
+                element.appendChild(opt);
             });
-        }
+        };
 
-        // Populate Branches / Specializations
-        if (this.fields.branchSpecialization && this.fields.branchSpecialization.options.length <= 1 && window.CONFIG.BRANCHES) {
+        // Section 1
+        if (this.fields.branchSpecialization && window.CONFIG.BRANCHES) {
+            this.fields.branchSpecialization.innerHTML = `<option value="" selected>Select branch (Optional)</option>`;
             window.CONFIG.BRANCHES.forEach(b => {
                 const opt = document.createElement('option');
                 opt.value = b;
@@ -114,66 +145,160 @@ class RegistrationForm {
             });
         }
 
-        // Populate Years
-        if (this.fields.year && this.fields.year.options.length <= 1 && window.CONFIG.YEARS) {
-            window.CONFIG.YEARS.forEach(y => {
-                const opt = document.createElement('option');
-                opt.value = y;
-                opt.textContent = y;
-                this.fields.year.appendChild(opt);
-            });
-        }
+        populateSelect(this.fields.year, window.CONFIG.YEARS, "Select your year of study");
 
-        // Populate Startup Stages
-        if (this.fields.startupStage && this.fields.startupStage.options.length <= 1 && window.CONFIG.STARTUP_STAGES) {
-            window.CONFIG.STARTUP_STAGES.forEach(s => {
-                const opt = document.createElement('option');
-                opt.value = s;
-                opt.textContent = s;
-                this.fields.startupStage.appendChild(opt);
-            });
-        }
+        // Section 2
+        populateSelect(this.fields.aiFamiliarity, window.CONFIG.AI_FAMILIARITY, "Select familiarity level");
+        populateSelect(this.fields.byjusFamiliarity, window.CONFIG.BYJUS_FAMILIARITY, "Select familiarity with BYJU'S");
+        populateSelect(this.fields.aiEducationConcerns, window.CONFIG.AI_CONCERNS, "Select your major concern");
+        populateSelect(this.fields.unstopRegistered, window.CONFIG.UNSTOP_OPTIONS, "Select an option");
 
-        // Populate Pitch Options
-        if (this.fields.pitchOpportunity && this.fields.pitchOpportunity.options.length <= 1 && window.CONFIG.PITCH_OPTIONS) {
-            window.CONFIG.PITCH_OPTIONS.forEach(p => {
-                const opt = document.createElement('option');
-                opt.value = p;
-                opt.textContent = p;
-                this.fields.pitchOpportunity.appendChild(opt);
-            });
-        }
-
-        // Populate Unstop Registration Status
-        if (this.fields.unstopRegistered && this.fields.unstopRegistered.options.length <= 1 && window.CONFIG.UNSTOP_OPTIONS) {
-            window.CONFIG.UNSTOP_OPTIONS.forEach(u => {
-                const opt = document.createElement('option');
-                opt.value = u;
-                opt.textContent = u;
-                this.fields.unstopRegistered.appendChild(opt);
-            });
-        }
+        // Section 3
+        populateSelect(this.fields.pitchOpportunity, window.CONFIG.PITCH_OPTIONS, "Select Yes / No");
+        populateSelect(this.fields.pitchType, window.CONFIG.PITCH_TYPES, "Select pitch category");
+        populateSelect(this.fields.pitchStage, window.CONFIG.PITCH_STAGES, "Select current stage");
     }
 
     /**
-     * Pitch Idea dynamic field toggle
+     * Initialize interactive AI Agent badge chips (Section 2)
+     */
+    initAIAgentChips() {
+        const grid = document.getElementById('ai-agents-chip-grid');
+        if (!grid || !window.CONFIG || !window.CONFIG.AI_AGENTS) return;
+
+        grid.innerHTML = "";
+        const selectedAgents = new Set();
+
+        window.CONFIG.AI_AGENTS.forEach(agent => {
+            const btn = document.createElement('button');
+            btn.type = "button";
+            btn.className = "tag-chip-btn";
+            btn.textContent = agent;
+
+            btn.addEventListener('click', () => {
+                if (agent === "I don't currently use any AI Agents") {
+                    selectedAgents.clear();
+                    selectedAgents.add(agent);
+                    grid.querySelectorAll('.tag-chip-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                } else {
+                    selectedAgents.delete("I don't currently use any AI Agents");
+                    const noneBtn = Array.from(grid.children).find(b => b.textContent.includes("I don't"));
+                    if (noneBtn) noneBtn.classList.remove('active');
+
+                    if (selectedAgents.has(agent)) {
+                        selectedAgents.delete(agent);
+                        btn.classList.remove('active');
+                    } else {
+                        selectedAgents.add(agent);
+                        btn.classList.add('active');
+                    }
+                }
+
+                if (this.fields.aiAgentsUsed) {
+                    this.fields.aiAgentsUsed.value = Array.from(selectedAgents).join(', ');
+                }
+            });
+
+            grid.appendChild(btn);
+        });
+    }
+
+    /**
+     * Dynamic toggle for Section 3 (Pitch to Divya)
      */
     setupPitchToggle() {
         const pitchSelect = this.fields.pitchOpportunity;
-        const pitchIdeaGroup = document.getElementById('pitchIdea-group');
-        if (!pitchSelect || !pitchIdeaGroup) return;
+        const pitchCard = document.getElementById('pitch-details-card');
+        if (!pitchSelect || !pitchCard) return;
 
-        const updateVisibility = () => {
-            if (pitchSelect.value === 'Yes') {
-                pitchIdeaGroup.classList.add('highlight-pitch');
-                pitchIdeaGroup.style.display = 'block';
+        const updatePitchVisibility = () => {
+            const val = pitchSelect.value || "";
+            if (val.toLowerCase().includes('yes')) {
+                pitchCard.style.display = 'flex';
             } else {
-                pitchIdeaGroup.classList.remove('highlight-pitch');
+                pitchCard.style.display = 'none';
             }
         };
 
-        pitchSelect.addEventListener('change', updateVisibility);
-        updateVisibility();
+        pitchSelect.addEventListener('change', updatePitchVisibility);
+        updatePitchVisibility();
+    }
+
+    /**
+     * Word counter for 50-word pitch response
+     */
+    setupWordCounter() {
+        const textarea = this.fields.pitchWhyDivya;
+        const counter = document.getElementById('pitch-word-counter');
+        if (!textarea || !counter) return;
+
+        const updateCount = () => {
+            const text = textarea.value.trim();
+            const words = text ? text.split(/\s+/).filter(Boolean) : [];
+            const count = words.length;
+
+            counter.textContent = `${count} / 50 words`;
+
+            if (count > 50) {
+                counter.classList.add('over-limit');
+            } else {
+                counter.classList.remove('over-limit');
+            }
+        };
+
+        textarea.addEventListener('input', updateCount);
+    }
+
+    /**
+     * Setup Pitch Deck file upload listener
+     */
+    setupFileUpload() {
+        const fileInput = this.fields.pitchDeckFile;
+        const nameDisplay = document.getElementById('file-name-display');
+        const promptSpan = document.getElementById('file-upload-prompt');
+        if (!fileInput) return;
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) {
+                this.uploadedFileBase64 = null;
+                this.uploadedFileName = "";
+                if (nameDisplay) nameDisplay.style.display = 'none';
+                if (promptSpan) promptSpan.style.display = 'block';
+                return;
+            }
+
+            // Validate PDF
+            if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+                alert("Please select a valid PDF file for your pitch deck.");
+                fileInput.value = "";
+                return;
+            }
+
+            // Max size 100MB
+            if (file.size > 100 * 1024 * 1024) {
+                alert("File exceeds maximum allowed size of 100MB.");
+                fileInput.value = "";
+                return;
+            }
+
+            this.uploadedFileName = file.name;
+            if (nameDisplay) {
+                nameDisplay.textContent = `✓ Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                nameDisplay.style.display = 'block';
+            }
+            if (promptSpan) promptSpan.style.display = 'none';
+
+            // Convert small PDFs (< 5MB) to base64 for direct Google Drive sync
+            if (file.size <= 5 * 1024 * 1024) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    this.uploadedFileBase64 = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     }
 
     /**
@@ -183,18 +308,19 @@ class RegistrationForm {
         const field = this.fields[fieldKey];
         if (!field) return true;
 
-        const val = field.value.trim();
+        const val = (field.value || "").trim();
         let isValid = true;
         let errorMsg = "";
 
         switch (fieldKey) {
+            // Section 1
             case 'fullName':
                 if (!val || val.length < 2) {
                     isValid = false;
                     errorMsg = "Please enter your full name (minimum 2 characters).";
                 } else if (!/^[a-zA-Z\s\.\'\-]+$/.test(val)) {
                     isValid = false;
-                    errorMsg = "Full name should only contain letters and spaces.";
+                    errorMsg = "Full name should contain letters and spaces.";
                 }
                 break;
 
@@ -214,7 +340,6 @@ class RegistrationForm {
 
             case 'contactNumber':
                 const cleanPhone = val.replace(/\D/g, '');
-                // 10 digits (or 12 digits starting with 91)
                 let isValidPhone = false;
                 if (cleanPhone.length === 10 && /^[6-9]\d{9}$/.test(cleanPhone)) {
                     isValidPhone = true;
@@ -235,20 +360,6 @@ class RegistrationForm {
                 }
                 break;
 
-            case 'courseDegree':
-                if (!val || val === "") {
-                    isValid = false;
-                    errorMsg = "Please select your course / degree.";
-                }
-                break;
-
-            case 'branchSpecialization':
-                if (!val || val === "") {
-                    isValid = false;
-                    errorMsg = "Please select your branch / specialization.";
-                }
-                break;
-
             case 'year':
                 if (!val || val === "") {
                     isValid = false;
@@ -256,17 +367,32 @@ class RegistrationForm {
                 }
                 break;
 
-            case 'startupStage':
-                if (!val || val === "") {
+            case 'courseDegree':
+                if (!val || val.length < 2) {
                     isValid = false;
-                    errorMsg = "Please select your current startup / idea stage.";
+                    errorMsg = "Please enter your programme / course (e.g. BTech, BSc, MBA).";
                 }
                 break;
 
-            case 'pitchOpportunity':
+            // Section 2
+            case 'aiFamiliarity':
                 if (!val || val === "") {
                     isValid = false;
-                    errorMsg = "Please select whether you'd like to pitch during the session.";
+                    errorMsg = "Please select your familiarity with AI Agents.";
+                }
+                break;
+
+            case 'byjusFamiliarity':
+                if (!val || val === "") {
+                    isValid = false;
+                    errorMsg = "Please select your familiarity with BYJU'S.";
+                }
+                break;
+
+            case 'aiEducationConcerns':
+                if (!val || val === "") {
+                    isValid = false;
+                    errorMsg = "Please select your primary concern regarding AI in education.";
                 }
                 break;
 
@@ -274,6 +400,46 @@ class RegistrationForm {
                 if (!val || val === "") {
                     isValid = false;
                     errorMsg = "Please select whether you've already registered on Unstop.";
+                }
+                break;
+
+            // Section 3
+            case 'pitchOpportunity':
+                if (!val || val === "") {
+                    isValid = false;
+                    errorMsg = "Please select whether you'd like to participate in Pitch to Divya.";
+                }
+                break;
+
+            case 'pitchType':
+                if (!val || val === "") {
+                    isValid = false;
+                    errorMsg = "Please select what you are pitching.";
+                }
+                break;
+
+            case 'pitchTitle':
+                if (!val || val.length < 2) {
+                    isValid = false;
+                    errorMsg = "Please enter the title/name of your idea.";
+                }
+                break;
+
+            case 'pitchStage':
+                if (!val || val === "") {
+                    isValid = false;
+                    errorMsg = "Please select the current stage of your idea.";
+                }
+                break;
+
+            case 'pitchWhyDivya':
+                const wordCount = val ? val.split(/\s+/).filter(Boolean).length : 0;
+                if (!val || wordCount === 0) {
+                    isValid = false;
+                    errorMsg = "Please explain why Divya should hear your pitch.";
+                } else if (wordCount > 50) {
+                    isValid = false;
+                    errorMsg = `Response is ${wordCount} words. Maximum allowed is 50 words.`;
                 }
                 break;
         }
@@ -323,23 +489,35 @@ class RegistrationForm {
             return;
         }
 
-        // 3. Validate all required fields
-        let isFormValid = true;
-        let firstInvalidField = null;
+        // 3. Determine required keys based on pitch choice
+        const isPitching = (this.fields.pitchOpportunity.value || "").toLowerCase().includes('yes');
 
-        const requiredKeys = [
+        let requiredKeys = [
             'fullName', 
             'email', 
             'contactNumber', 
             'collegeName', 
-            'courseDegree', 
-            'branchSpecialization', 
             'year', 
-            'startupStage', 
-            'pitchOpportunity',
-            'unstopRegistered'
+            'courseDegree',
+            'aiFamiliarity',
+            'byjusFamiliarity',
+            'aiEducationConcerns',
+            'unstopRegistered',
+            'pitchOpportunity'
         ];
-        
+
+        if (isPitching) {
+            requiredKeys = requiredKeys.concat([
+                'pitchType',
+                'pitchTitle',
+                'pitchStage',
+                'pitchWhyDivya'
+            ]);
+        }
+
+        let isFormValid = true;
+        let firstInvalidField = null;
+
         for (const key of requiredKeys) {
             const valid = this.validateField(key);
             if (!valid) {
@@ -347,6 +525,24 @@ class RegistrationForm {
                 if (!firstInvalidField) {
                     firstInvalidField = this.fields[key];
                 }
+            }
+        }
+
+        // Validate pitch deck upload or link if pitching
+        if (isPitching) {
+            const deckLink = this.fields.pitchDeckLink ? this.fields.pitchDeckLink.value.trim() : "";
+            const hasDeck = this.uploadedFileName !== "" || deckLink !== "";
+            const deckError = document.getElementById('pitchDeck-error');
+            if (!hasDeck) {
+                isFormValid = false;
+                if (deckError) {
+                    deckError.textContent = "Please upload a PDF pitch deck or paste a link.";
+                    deckError.classList.add('show');
+                }
+                if (!firstInvalidField) firstInvalidField = this.fields.pitchDeckLink;
+            } else if (deckError) {
+                deckError.textContent = "";
+                deckError.classList.remove('show');
             }
         }
 
@@ -361,18 +557,33 @@ class RegistrationForm {
 
         // 5. Gather sanitized form data
         const formData = {
+            // Section 1
             fullName: this.fields.fullName.value.trim(),
             email: this.fields.email.value.trim().toLowerCase(),
             contactNumber: this.fields.contactNumber.value.trim(),
             collegeName: this.fields.collegeName.value.trim(),
-            courseDegree: this.fields.courseDegree.value.trim(),
-            branchSpecialization: this.fields.branchSpecialization.value.trim(),
+            branchSpecialization: this.fields.branchSpecialization ? this.fields.branchSpecialization.value.trim() : "",
+            division: this.fields.division ? this.fields.division.value.trim() : "",
             year: this.fields.year.value,
-            startupStage: this.fields.startupStage.value,
-            pitchOpportunity: this.fields.pitchOpportunity.value,
+            courseDegree: this.fields.courseDegree.value.trim(),
+
+            // Section 2
+            aiFamiliarity: this.fields.aiFamiliarity.value,
+            byjusFamiliarity: this.fields.byjusFamiliarity.value,
+            aiEducationConcerns: this.fields.aiEducationConcerns.value,
+            aiAgentsUsed: this.fields.aiAgentsUsed ? this.fields.aiAgentsUsed.value : "",
             unstopRegistered: this.fields.unstopRegistered ? this.fields.unstopRegistered.value : "No, not yet",
-            pitchIdea: this.fields.pitchIdea ? this.fields.pitchIdea.value.trim() : "",
-            speakerQuestion: this.fields.speakerQuestion ? this.fields.speakerQuestion.value.trim() : "",
+
+            // Section 3 (Pitch)
+            pitchOpportunity: this.fields.pitchOpportunity.value,
+            pitchType: isPitching && this.fields.pitchType ? this.fields.pitchType.value : "",
+            pitchTitle: isPitching && this.fields.pitchTitle ? this.fields.pitchTitle.value.trim() : "",
+            pitchStage: isPitching && this.fields.pitchStage ? this.fields.pitchStage.value : "",
+            pitchDeckFile: this.uploadedFileName,
+            pitchDeckBase64: this.uploadedFileBase64,
+            pitchDeckLink: isPitching && this.fields.pitchDeckLink ? this.fields.pitchDeckLink.value.trim() : "",
+            pitchWhyDivya: isPitching && this.fields.pitchWhyDivya ? this.fields.pitchWhyDivya.value.trim() : "",
+
             source: this.getURLParameter('source') || 'speaker_session_link'
         };
 
