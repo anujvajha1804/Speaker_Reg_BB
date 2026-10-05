@@ -1,6 +1,6 @@
 /**
  * TheNextChapter - Interactive Registration Form Component
- * Handles client-side validation for all 11 event registration fields,
+ * Handles client-side validation for all event registration fields,
  * inline error feedback, honeypot anti-spam, and submission locks.
  */
 
@@ -24,6 +24,7 @@ class RegistrationForm {
             year: document.getElementById('year'),
             startupStage: document.getElementById('startupStage'),
             pitchOpportunity: document.getElementById('pitchOpportunity'),
+            unstopRegistered: document.getElementById('unstopRegistered'),
             pitchIdea: document.getElementById('pitchIdea'),
             speakerQuestion: document.getElementById('speakerQuestion'),
             honeypot: document.getElementById('website_hp')
@@ -41,8 +42,22 @@ class RegistrationForm {
         // Dynamic toggle for pitchIdea field based on pitchOpportunity
         this.setupPitchToggle();
 
-        // Attach real-time validation on blur & input
-        const requiredKeys = ['fullName', 'email', 'contactNumber', 'collegeName', 'courseDegree', 'branchSpecialization', 'year', 'startupStage', 'pitchOpportunity'];
+        // Auto-detect source from URL and pre-select Unstop if coming from Unstop
+        this.checkURLParams();
+
+        // Attach real-time validation on blur, input & change
+        const requiredKeys = [
+            'fullName', 
+            'email', 
+            'contactNumber', 
+            'collegeName', 
+            'courseDegree', 
+            'branchSpecialization', 
+            'year', 
+            'startupStage', 
+            'pitchOpportunity',
+            'unstopRegistered'
+        ];
         
         requiredKeys.forEach(key => {
             const field = this.fields[key];
@@ -54,15 +69,23 @@ class RegistrationForm {
                     }
                 });
                 field.addEventListener('change', () => {
-                    if (field.classList.contains('is-invalid')) {
-                        this.validateField(key);
-                    }
+                    this.validateField(key);
                 });
             }
         });
 
         // Form Submit listener
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    /**
+     * Check URL params for pre-fills (e.g. ?source=unstop)
+     */
+    checkURLParams() {
+        const source = this.getURLParameter('source') || '';
+        if (source.toLowerCase().includes('unstop') && this.fields.unstopRegistered) {
+            this.fields.unstopRegistered.value = "Yes, already registered on Unstop";
+        }
     }
 
     /**
@@ -120,6 +143,16 @@ class RegistrationForm {
                 this.fields.pitchOpportunity.appendChild(opt);
             });
         }
+
+        // Populate Unstop Registration Status
+        if (this.fields.unstopRegistered && this.fields.unstopRegistered.options.length <= 1 && window.CONFIG.UNSTOP_OPTIONS) {
+            window.CONFIG.UNSTOP_OPTIONS.forEach(u => {
+                const opt = document.createElement('option');
+                opt.value = u;
+                opt.textContent = u;
+                this.fields.unstopRegistered.appendChild(opt);
+            });
+        }
     }
 
     /**
@@ -158,15 +191,18 @@ class RegistrationForm {
             case 'fullName':
                 if (!val || val.length < 2) {
                     isValid = false;
-                    errorMsg = "Please enter your full name (minimum 2 letters).";
+                    errorMsg = "Please enter your full name (minimum 2 characters).";
+                } else if (!/^[a-zA-Z\s\.\'\-]+$/.test(val)) {
+                    isValid = false;
+                    errorMsg = "Full name should only contain letters and spaces.";
                 }
                 break;
 
             case 'email':
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 if (!val || !emailRegex.test(val)) {
                     isValid = false;
-                    errorMsg = "Please enter an active email address.";
+                    errorMsg = "Please enter a valid email address (e.g. name@domain.com).";
                 } else if (this.options.allowedDomain && this.options.allowedDomain.trim() !== "") {
                     const domain = this.options.allowedDomain.toLowerCase();
                     if (!val.toLowerCase().endsWith("@" + domain) && !val.toLowerCase().endsWith("." + domain)) {
@@ -178,10 +214,17 @@ class RegistrationForm {
 
             case 'contactNumber':
                 const cleanPhone = val.replace(/\D/g, '');
-                // 10 digits (or 12 digits with +91 country prefix)
-                if (!val || (cleanPhone.length !== 10 && cleanPhone.length !== 12)) {
+                // 10 digits (or 12 digits starting with 91)
+                let isValidPhone = false;
+                if (cleanPhone.length === 10 && /^[6-9]\d{9}$/.test(cleanPhone)) {
+                    isValidPhone = true;
+                } else if (cleanPhone.length === 12 && cleanPhone.startsWith('91') && /^91[6-9]\d{9}$/.test(cleanPhone)) {
+                    isValidPhone = true;
+                }
+
+                if (!isValidPhone) {
                     isValid = false;
-                    errorMsg = "Please enter a valid 10-digit WhatsApp/mobile number.";
+                    errorMsg = "Please enter a valid 10-digit mobile number.";
                 }
                 break;
 
@@ -195,14 +238,14 @@ class RegistrationForm {
             case 'courseDegree':
                 if (!val || val === "") {
                     isValid = false;
-                    errorMsg = "Please select your course/degree.";
+                    errorMsg = "Please select your course / degree.";
                 }
                 break;
 
             case 'branchSpecialization':
                 if (!val || val === "") {
                     isValid = false;
-                    errorMsg = "Please select your branch/specialization.";
+                    errorMsg = "Please select your branch / specialization.";
                 }
                 break;
 
@@ -216,7 +259,7 @@ class RegistrationForm {
             case 'startupStage':
                 if (!val || val === "") {
                     isValid = false;
-                    errorMsg = "Please select where you are with your startup/idea.";
+                    errorMsg = "Please select your current startup / idea stage.";
                 }
                 break;
 
@@ -224,6 +267,13 @@ class RegistrationForm {
                 if (!val || val === "") {
                     isValid = false;
                     errorMsg = "Please select whether you'd like to pitch during the session.";
+                }
+                break;
+
+            case 'unstopRegistered':
+                if (!val || val === "") {
+                    isValid = false;
+                    errorMsg = "Please select whether you've already registered on Unstop.";
                 }
                 break;
         }
@@ -277,7 +327,18 @@ class RegistrationForm {
         let isFormValid = true;
         let firstInvalidField = null;
 
-        const requiredKeys = ['fullName', 'email', 'contactNumber', 'collegeName', 'courseDegree', 'branchSpecialization', 'year', 'startupStage', 'pitchOpportunity'];
+        const requiredKeys = [
+            'fullName', 
+            'email', 
+            'contactNumber', 
+            'collegeName', 
+            'courseDegree', 
+            'branchSpecialization', 
+            'year', 
+            'startupStage', 
+            'pitchOpportunity',
+            'unstopRegistered'
+        ];
         
         for (const key of requiredKeys) {
             const valid = this.validateField(key);
@@ -289,7 +350,7 @@ class RegistrationForm {
             }
         }
 
-        // 4. Focus first invalid field if validation fails
+        // 4. Focus and scroll to first invalid field if validation fails
         if (!isFormValid) {
             if (firstInvalidField) {
                 firstInvalidField.focus();
@@ -309,6 +370,7 @@ class RegistrationForm {
             year: this.fields.year.value,
             startupStage: this.fields.startupStage.value,
             pitchOpportunity: this.fields.pitchOpportunity.value,
+            unstopRegistered: this.fields.unstopRegistered ? this.fields.unstopRegistered.value : "No, not yet",
             pitchIdea: this.fields.pitchIdea ? this.fields.pitchIdea.value.trim() : "",
             speakerQuestion: this.fields.speakerQuestion ? this.fields.speakerQuestion.value.trim() : "",
             source: this.getURLParameter('source') || 'speaker_session_link'

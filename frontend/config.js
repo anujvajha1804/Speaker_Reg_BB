@@ -79,6 +79,11 @@ const CONFIG = {
         "No"
     ],
 
+    UNSTOP_OPTIONS: [
+        "No, not yet",
+        "Yes, already registered on Unstop"
+    ],
+
     // ----------------------------------------------------
     // 3D BB LOGO CONFIGURATION (Poster Purple / Plum Theme)
     // ----------------------------------------------------

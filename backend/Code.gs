@@ -56,6 +56,7 @@ function doPost(e) {
     const pitchOpportunity = (data.pitchOpportunity || "").trim();
     const pitchIdea = (data.pitchIdea || "").trim();
     const speakerQuestion = (data.speakerQuestion || "").trim();
+    const unstopRegistered = (data.unstopRegistered || "").trim();
     const source = (data.source || "speaker_session_link").trim();
 
     // 2. Server-Side Data Validation
@@ -184,6 +185,7 @@ function doPost(e) {
         pitchOpportunity,
         pitchIdea,
         speakerQuestion,
+        unstopRegistered,
         source
       ];
 
@@ -256,6 +258,7 @@ function getOrCreateSheet() {
       "Pitch Opportunity",
       "Pitch Idea Description",
       "Question for Divya Gokulnath",
+      "Day 2 Workshop (Unstop) Status",
       "Source"
     ];
     sheet.appendRow(headers);

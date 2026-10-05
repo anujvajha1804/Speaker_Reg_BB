@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Trigger Hero Entrance Animations (GSAP)
     initEntranceAnimations();
 
+    let activeSubmittedData = null;
+
     // 4. Initialize Visual Confirmation Component
     const thumbprintHandler = new ThumbprintAnimation('thumbprint-overlay', {
         onComplete: (result) => {
             if (result && result.success) {
-                showSuccessModal(result);
+                showSuccessModal(result, activeSubmittedData);
             }
         },
         onError: () => {
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formHandler = new RegistrationForm('speaker-registration-form', {
         allowedDomain: window.CONFIG ? window.CONFIG.ALLOWED_EMAIL_DOMAIN : "",
         onValidSubmit: (formData) => {
+            activeSubmittedData = formData;
             // Lock form inputs
             formHandler.setDisabled(true);
 
@@ -107,19 +110,39 @@ async function sendRegistrationToBackend(formData) {
 
 /**
  * Display Success Modal with Confirmation Details & Confetti Celebration
+ * Hides Day 2 Unstop promo if user has already registered through Unstop
  */
-function showSuccessModal(result) {
+function showSuccessModal(result, formData = null) {
     const modal = document.getElementById('success-modal');
     const regIdElem = document.getElementById('res-registration-id');
     const studentNameElem = document.getElementById('res-student-name');
+    const day2Promo = document.querySelector('.modal-day2-promo');
     const fullNameInput = document.getElementById('fullName');
+    const unstopSelect = document.getElementById('unstopRegistered');
 
     if (regIdElem && result.registrationId) {
         regIdElem.textContent = result.registrationId;
     }
 
-    if (studentNameElem && fullNameInput) {
-        studentNameElem.textContent = fullNameInput.value.trim() || "Participant";
+    if (studentNameElem) {
+        const name = (formData && formData.fullName) || (fullNameInput ? fullNameInput.value.trim() : "") || "Participant";
+        studentNameElem.textContent = name;
+    }
+
+    // Check if user has already registered through Unstop
+    const isUnstopRegistered = 
+        (formData && formData.unstopRegistered && formData.unstopRegistered.toLowerCase().includes('yes')) ||
+        (unstopSelect && unstopSelect.value && unstopSelect.value.toLowerCase().includes('yes')) ||
+        (formData && formData.source && formData.source.toLowerCase().includes('unstop')) ||
+        (new URLSearchParams(window.location.search).get('source') || '').toLowerCase().includes('unstop');
+
+    // Conditionally hide Day 2 Unstop Workshop promo banner if already registered
+    if (day2Promo) {
+        if (isUnstopRegistered) {
+            day2Promo.style.display = 'none';
+        } else {
+            day2Promo.style.display = 'block';
+        }
     }
 
     if (modal) {
