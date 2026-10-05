@@ -1,10 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" fill="none">
-  <!-- BYJU'S Rounded Container / Badge -->
-  <rect width="160" height="48" rx="24" fill="#581c87" />
-  <!-- Letter B and BYJU'S Typography -->
-  <g fill="#ffffff" font-family="'Outfit', 'Plus Jakarta Sans', sans-serif">
-    <text x="22" y="32" font-size="22" font-weight="900" letter-spacing="1.5">BYJU'S</text>
-  </g>
-  <!-- Accent dot/spark -->
-  <circle cx="138" cy="18" r="3.5" fill="#ec4899" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 34" fill="none">
+  <!-- Clean BYJU'S Brand Wordmark (No container box, transparent) -->
+  <text x="2" y="26" font-family="'Outfit', 'Plus Jakarta Sans', sans-serif" font-size="26" font-weight="900" letter-spacing="1.2" fill="#6b21a8">BYJU'S</text>
+  <circle cx="124" cy="11" r="4" fill="#ec4899" />
 </svg>
