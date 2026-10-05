@@ -20,7 +20,7 @@ const CONFIG = {
     SPEAKER_ROLE: "Co-founder, BYJU'S",
     EVENT_DATE: "9th October 2026",
     EVENT_TIME: "3:00 PM Onwards",
-    EVENT_VENUE: "Sakarben Auditorium, KJSSE",
+    EVENT_VENUE: "Aryabhatta Auditorium, KJSSE",
     
     // Day 2 Workshop link (Replace with live Unstop URL when ready)
     DAY2_UNSTOP_URL: "https://unstop.com",
