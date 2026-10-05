@@ -324,16 +324,17 @@ class RegistrationForm {
                 break;
 
             case 'email':
-                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                if (!val || !emailRegex.test(val)) {
+                const emailLower = val.toLowerCase();
+                const somaiyaEmailRegex = /^[a-zA-Z0-9._%+-]+@somaiya\.edu$/i;
+                if (!val) {
                     isValid = false;
-                    errorMsg = "Please enter a valid email address (e.g. name@domain.com).";
-                } else if (this.options.allowedDomain && this.options.allowedDomain.trim() !== "") {
-                    const domain = this.options.allowedDomain.toLowerCase();
-                    if (!val.toLowerCase().endsWith("@" + domain) && !val.toLowerCase().endsWith("." + domain)) {
-                        isValid = false;
-                        errorMsg = `Please use your official email ID (@${domain}).`;
-                    }
+                    errorMsg = "Please enter your Somaiya email ID.";
+                } else if (!emailLower.endsWith("@somaiya.edu")) {
+                    isValid = false;
+                    errorMsg = "Email must be an official Somaiya ID ending with @somaiya.edu.";
+                } else if (!somaiyaEmailRegex.test(val)) {
+                    isValid = false;
+                    errorMsg = "Please enter a valid email address with letters and numbers only.";
                 }
                 break;
 

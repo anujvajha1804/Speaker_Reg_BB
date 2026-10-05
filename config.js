@@ -9,8 +9,8 @@ const CONFIG = {
     // ----------------------------------------------------
     GOOGLE_APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwWaYbYUoEe8lsJMLzwL1eyg3PZ8KTYeS_0SEeBJAfep3M1lIK-SsdDoAPvb6WzusJp/exec",
     
-    // Domain restriction for emails (Set to "" to allow any college / domain since open to all colleges)
-    ALLOWED_EMAIL_DOMAIN: "",
+    // Domain restriction for emails (Compulsory @somaiya.edu)
+    ALLOWED_EMAIL_DOMAIN: "somaiya.edu",
 
     // ----------------------------------------------------
     // EVENT & LINKS

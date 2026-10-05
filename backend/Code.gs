@@ -16,8 +16,8 @@ const SPREADSHEET_ID = "18_HAVxoha6-lqeo2lrJFKsk2uCR7o9Re4wq4hLoAD7A";
 // Tab name inside your Google Sheet
 const SHEET_NAME = "Registrations";
 
-// Domain restriction ("" allows students from all colleges)
-const ALLOWED_EMAIL_DOMAIN = "";
+// Domain restriction (Compulsory @somaiya.edu)
+const ALLOWED_EMAIL_DOMAIN = "somaiya.edu";
 
 
 // ====================================================
