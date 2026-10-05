@@ -223,8 +223,7 @@ function initEntranceAnimations() {
     tl.from('.slanted-block', { x: -30, opacity: 0, stagger: 0.15 })
       .from('.hero-tagline', { y: 20, opacity: 0 }, "-=0.3")
       .from('.hero-desc', { y: 20, opacity: 0 }, "-=0.4")
-      .from('.event-pill-grid .event-pill-item', { y: 20, opacity: 0, stagger: 0.1 }, "-=0.3")
-      .from('.hero-right', { scale: 0.85, opacity: 0, duration: 0.9 }, "-=0.7");
+      .from('.event-pill-grid .event-pill-item', { y: 20, opacity: 0, stagger: 0.1 }, "-=0.3");
 }
 
 /**
