@@ -254,7 +254,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Hero Section (Centered Layout) --- */
 .hero-section {
-    padding-top: 1.5rem;
+    padding-top: 4.5rem;
     padding-bottom: 0.5rem;
     position: relative;
 }
@@ -1990,7 +1990,7 @@ html, body {
     }
 
     .hero-section {
-        padding-top: 1.75rem;
+        padding-top: 3.25rem;
         padding-bottom: 1.5rem;
     }
 
