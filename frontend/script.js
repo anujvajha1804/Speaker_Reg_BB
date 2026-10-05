@@ -220,12 +220,10 @@ function initEntranceAnimations() {
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
 
-    tl.from('.navbar', { y: -40, opacity: 0 })
-      .from('.slanted-block', { x: -30, opacity: 0, stagger: 0.15 }, "-=0.3")
-      .from('.hero-tagline', { y: 20, opacity: 0 }, "-=0.4")
+    tl.from('.slanted-block', { x: -30, opacity: 0, stagger: 0.15 })
+      .from('.hero-tagline', { y: 20, opacity: 0 }, "-=0.3")
       .from('.hero-desc', { y: 20, opacity: 0 }, "-=0.4")
       .from('.event-pill-grid .event-pill-item', { y: 20, opacity: 0, stagger: 0.1 }, "-=0.3")
-      .from('.hero-cta-group', { y: 20, opacity: 0 }, "-=0.3")
       .from('.hero-right', { scale: 0.85, opacity: 0, duration: 0.9 }, "-=0.7");
 }
 

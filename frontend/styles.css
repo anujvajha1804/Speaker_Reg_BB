@@ -186,8 +186,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Hero Section (Centered Layout) --- */
 .hero-section {
-    padding-top: 8rem;
-    padding-bottom: 4rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
     position: relative;
 }
 
@@ -1898,8 +1898,15 @@ select.input-control option {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints & Media Queries
+   Responsive Breakpoints & Media Queries (Mobile & Universal Polish)
    ========================================================================== */
+
+/* Prevent any horizontal overflow on all screen sizes */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
 
 @media (max-width: 992px) {
     .hero-grid {
@@ -1954,95 +1961,335 @@ select.input-control option {
 }
 
 @media (max-width: 768px) {
-    .hanging-plaque-wrapper {
-        padding-top: 75px;
+    .section {
+        padding: 3.5rem 0;
     }
 
-    .hanging-plaque-board {
-        padding: 2.75rem 1.75rem 2rem;
-    }
-
-    .eyelet-left {
-        left: 25px;
-    }
-
-    .eyelet-right {
-        right: 25px;
-    }
-
-    .plaque-title {
-        font-size: 2.1rem;
-    }
-}
-
-@media (max-width: 640px) {
     .hero-section {
-        padding-top: 6rem;
+        padding: 2.5rem 0 3.5rem;
     }
 
-    .main-heading-text {
-        font-size: 2.2rem;
+    .section-title {
+        font-size: clamp(1.85rem, 6.5vw, 2.4rem);
     }
 
-    .block-brought-by .block-inner {
+    .section-subtitle {
         font-size: 0.95rem;
     }
 
-    .speaker-name-title {
-        font-size: 1.4rem;
+    .hanging-plaque-wrapper {
+        padding-top: 55px;
     }
 
-    .slanted-block {
-        transform: skewX(-5deg);
+    .hanging-plaque-ropes {
+        height: 55px;
     }
 
-    .block-inner {
-        transform: skewX(5deg);
+    .hanging-plaque-board {
+        padding: 2.25rem 1.25rem 1.75rem;
+        border-radius: var(--radius-lg);
     }
 
-    .event-pill-grid {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+    .eyelet {
+        width: 14px;
+        height: 14px;
+        top: -7px;
     }
 
-    .event-pill-item {
-        width: 100%;
-        max-width: 280px;
+    .eyelet-left {
+        left: 20px;
     }
 
-    .why-attend-board {
-        padding: 2.25rem 0.85rem 1.75rem;
+    .eyelet-right {
+        right: 20px;
+    }
+
+    .plaque-title {
+        font-size: 2rem;
+    }
+
+    .sticky-note-card {
+        transform: none !important;
     }
 
     .why-attend-grid {
         grid-template-columns: 1fr;
-        gap: 1.75rem;
+        gap: 1.5rem;
     }
 
     .spec-row {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .form-row-2 {
         grid-template-columns: 1fr;
         gap: 0.9rem;
     }
+}
 
-    .hanging-plaque-board {
-        padding: 2.25rem 1.15rem 1.75rem;
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
-    .workshop-grid-sticky {
-        padding: 2.75rem 1.25rem 2rem;
+    .hero-section {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+    }
+
+    .main-heading-text {
+        font-size: clamp(1.85rem, 7.5vw, 2.35rem);
+        letter-spacing: 0.02em;
+    }
+
+    .block-brought-by {
+        padding: 0.35rem 0.85rem;
+    }
+
+    .block-brought-by .block-inner {
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+    }
+
+    .block-main-title {
+        padding: 0.5rem 1.1rem;
+    }
+
+    .block-speaker {
+        padding: 0.45rem 1rem;
+    }
+
+    .speaker-name-title {
+        font-size: clamp(1.2rem, 5.5vw, 1.5rem);
+    }
+
+    .speaker-badge-tag {
+        font-size: 0.72rem;
+        padding: 0.18rem 0.55rem;
+    }
+
+    .slanted-block {
+        transform: skewX(-4deg);
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .block-inner {
+        transform: skewX(4deg);
+    }
+
+    .hero-tagline {
+        font-size: 1.05rem;
+        line-height: 1.55;
+        padding: 0 0.5rem;
+    }
+
+    .hero-tagline .quote-mark {
+        font-size: 1.6rem;
+    }
+
+    .hero-desc {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        padding: 0 0.25rem;
+    }
+
+    .event-pill-grid {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        margin: 1.5rem auto;
+        gap: 0.75rem;
+    }
+
+    .event-pill-item {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.75rem 1rem;
+    }
+
+    .hero-cta-group {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .hero-cta-group .btn-primary,
+    .hero-cta-group .btn-secondary {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+        text-align: center;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .why-attend-board {
+        padding: 2rem 0.85rem 1.5rem;
+    }
+
+    .sticky-tape {
+        width: 85px;
+        height: 22px;
+        top: -11px;
+    }
+
+    .sticky-note-card {
+        padding: 1.4rem 1.1rem;
+    }
+
+    .sticky-note-title {
+        font-size: 1.15rem;
+    }
+
+    .sticky-note-desc {
+        font-size: 0.9rem;
+    }
+
+    .hanging-plaque-wrapper {
+        padding-top: 45px;
+    }
+
+    .hanging-plaque-ropes {
+        height: 45px;
+    }
+
+    .hanging-plaque-board {
+        padding: 1.75rem 0.85rem 1.5rem;
+    }
+
+    .plaque-header-pill {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.85rem;
     }
 
     .plaque-title {
-        font-size: 1.85rem;
+        font-size: 1.65rem;
+    }
+
+    .plaque-subtitle {
+        font-size: 0.88rem;
+    }
+
+    .form-section-card {
+        padding: 1.25rem 0.85rem;
+        border-radius: var(--radius-md);
+    }
+
+    .form-section-header {
+        margin-bottom: 1rem;
+    }
+
+    .form-section-title {
+        font-size: 1.05rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-label {
+        font-size: 0.86rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        font-size: 0.92rem;
+        padding: 0.75rem 0.85rem;
+    }
+
+    .agent-chips-grid {
+        gap: 0.45rem;
+    }
+
+    .agent-chip {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .file-upload-box {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .file-upload-title {
+        font-size: 0.95rem;
+    }
+
+    .file-upload-sub {
+        font-size: 0.78rem;
     }
 
     .form-submit-btn {
-        font-size: 1.05rem;
-        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        padding: 0.95rem 1.25rem;
+        width: 100%;
+    }
+
+    .modal-card {
+        padding: 1.5rem 1rem;
+        width: 95%;
+        margin: 1rem auto;
+    }
+
+    .reg-id-value {
+        font-size: 1.4rem;
+    }
+
+    .success-details-list {
+        padding: 1rem;
+        font-size: 0.88rem;
+    }
+
+    .success-details-item {
+        font-size: 0.85rem;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .modal-day2-promo {
+        padding: 1rem;
+    }
+
+    .footer {
+        padding: 2.5rem 1rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-heading-text {
+        font-size: 1.65rem;
+        letter-spacing: 0.01em;
+    }
+
+    .block-brought-by .block-inner {
+        font-size: 0.75rem;
+    }
+
+    .speaker-name-title {
+        font-size: 1.15rem;
+    }
+
+    .speaker-badge-tag {
+        font-size: 0.68rem;
+    }
+
+    .plaque-title {
+        font-size: 1.45rem;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
     }
 }
