@@ -58,10 +58,10 @@ const CONFIG = {
     ],
 
     AI_FAMILIARITY: [
-        "I use AI Agents regularly",
-        "I have experimented with AI Agents",
+        "I use AI Tools regularly",
+        "I have experimented with AI Tools",
         "I understand the concept but haven't used them much",
-        "I have heard of AI Agents but don't know much about them",
+        "I have heard of AI Tools but don't know much about them",
         "This is completely new to me"
     ],
 
@@ -86,7 +86,7 @@ const CONFIG = {
         "Cursor",
         "Manus",
         "Other",
-        "I don't currently use any AI Agents"
+        "I don't currently use any AI Tools"
     ],
 
     BYJUS_FAMILIARITY: [

@@ -175,13 +175,16 @@ class RegistrationForm {
             btn.textContent = agent;
 
             btn.addEventListener('click', () => {
-                if (agent === "I don't currently use any AI Agents") {
+                const isNone = agent.startsWith("I don't");
+                if (isNone) {
                     selectedAgents.clear();
                     selectedAgents.add(agent);
                     grid.querySelectorAll('.tag-chip-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                 } else {
-                    selectedAgents.delete("I don't currently use any AI Agents");
+                    Array.from(selectedAgents).forEach(a => {
+                        if (a.startsWith("I don't")) selectedAgents.delete(a);
+                    });
                     const noneBtn = Array.from(grid.children).find(b => b.textContent.includes("I don't"));
                     if (noneBtn) noneBtn.classList.remove('active');
 
