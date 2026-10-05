@@ -218,9 +218,9 @@ function triggerConfetti() {
 function initEntranceAnimations() {
     if (typeof gsap === 'undefined') return;
 
-    const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
-
-    tl.from('.slanted-block', { x: -30, opacity: 0, stagger: 0.15 })
+    tl.from('.hero-main-title', { y: -20, opacity: 0, duration: 0.7 })
+      .from('.hero-speaker-row', { y: 15, opacity: 0, duration: 0.6 }, "-=0.3")
+      .from('.hero-brought-by', { y: 10, opacity: 0, duration: 0.5 }, "-=0.3")
       .from('.hero-tagline', { y: 20, opacity: 0 }, "-=0.3")
       .from('.hero-desc', { y: 20, opacity: 0 }, "-=0.4")
       .from('.event-pill-grid .event-pill-item', { y: 20, opacity: 0, stagger: 0.1 }, "-=0.3");
