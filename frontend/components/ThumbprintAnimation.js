@@ -15,7 +15,7 @@ class ThumbprintAnimation {
 
         this.elements = {
             card: this.overlay ? this.overlay.querySelector('.thumbprint-card') : null,
-            svg: this.overlay ? this.overlay.querySelector('.thumbprint-svg') : null,
+            spinner: this.overlay ? (this.overlay.querySelector('.registration-spinner') || this.overlay.querySelector('.thumbprint-svg')) : null,
             title: this.overlay ? this.overlay.querySelector('.thumbprint-status-title') : null,
             sub: this.overlay ? this.overlay.querySelector('.thumbprint-status-sub') : null,
             checkmark: this.overlay ? this.overlay.querySelector('.success-checkmark-icon') : null,
@@ -63,7 +63,7 @@ class ThumbprintAnimation {
     showSuccessState(result) {
         this.overlay.classList.remove('scanning');
         
-        if (this.elements.svg) this.elements.svg.style.display = 'none';
+        if (this.elements.spinner) this.elements.spinner.style.display = 'none';
         if (this.elements.checkmark) this.elements.checkmark.style.display = 'flex';
 
         if (this.elements.title) this.elements.title.textContent = "Registration Confirmed! 🌱";
@@ -93,7 +93,7 @@ class ThumbprintAnimation {
     showDuplicateState(result) {
         this.overlay.classList.remove('scanning');
 
-        if (this.elements.svg) this.elements.svg.style.display = 'none';
+        if (this.elements.spinner) this.elements.spinner.style.display = 'none';
         if (this.elements.checkmark) {
             this.elements.checkmark.style.display = 'flex';
             this.elements.checkmark.innerHTML = '🎉';
@@ -116,7 +116,7 @@ class ThumbprintAnimation {
     showErrorState(errorMessage) {
         this.overlay.classList.remove('scanning');
 
-        if (this.elements.svg) this.elements.svg.style.display = 'none';
+        if (this.elements.spinner) this.elements.spinner.style.display = 'none';
         if (this.elements.errorIcon) this.elements.errorIcon.style.display = 'flex';
 
         if (this.elements.title) this.elements.title.textContent = "Something Went Wrong";
@@ -140,7 +140,7 @@ class ThumbprintAnimation {
      * Reset UI state
      */
     resetState() {
-        if (this.elements.svg) this.elements.svg.style.display = 'block';
+        if (this.elements.spinner) this.elements.spinner.style.display = 'block';
         if (this.elements.checkmark) {
             this.elements.checkmark.style.display = 'none';
             this.elements.checkmark.innerHTML = '✓';
