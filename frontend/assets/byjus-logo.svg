@@ -1,24 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 130" fill="none">
-  <!-- Official BYJU'S App Icon Squircle -->
-  <rect x="5" y="5" width="120" height="120" rx="28" fill="#813588" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 120" fill="none">
+  <!-- White Squircle App Icon on Left with Drop Shadow -->
+  <rect x="5" y="5" width="110" height="110" rx="26" fill="#ffffff" stroke="rgba(126, 34, 206, 0.2)" stroke-width="2" />
   
-  <!-- 3D 'B' Logo Shape Inside Squircle -->
-  <g transform="translate(25, 22) scale(0.72)">
+  <!-- 3D 'B' Inside Squircle -->
+  <g transform="translate(25, 20) scale(0.68)">
     <!-- Shadow / 3D depth layer -->
     <path d="M22 10 C22 10, 52 10, 68 18 C84 26, 88 42, 82 54 C96 64, 98 84, 86 100 C74 116, 42 120, 22 120 L38 126 C58 126, 90 122, 102 104 C114 86, 110 66, 96 54 C100 40, 96 22, 78 12 C60 2, 28 4, 22 10 Z" fill="#581a5e" />
     <!-- Front 'B' Face -->
-    <path d="M12 12 C12 6, 48 4, 66 12 C82 20, 84 38, 76 48 C90 56, 92 76, 80 90 C68 104, 38 106, 16 106 C10 106, 12 100, 12 12 Z" fill="#ffffff" />
-    <path d="M28 26 C36 24, 52 24, 60 28 C68 32, 68 40, 62 44 C56 48, 40 48, 30 48 Z" fill="#813588" />
-    <path d="M30 60 C38 60, 56 60, 66 64 C74 68, 74 78, 68 84 C60 90, 42 90, 30 88 Z" fill="#813588" />
+    <path d="M12 12 C12 6, 48 4, 66 12 C82 20, 84 38, 76 48 C90 56, 92 76, 80 90 C68 104, 38 106, 16 106 C10 106, 12 100, 12 12 Z" fill="#813588" />
+    <path d="M28 26 C36 24, 52 24, 60 28 C68 32, 68 40, 62 44 C56 48, 40 48, 30 48 Z" fill="#ffffff" />
+    <path d="M30 60 C38 60, 56 60, 66 64 C74 68, 74 78, 68 84 C60 90, 42 90, 30 88 Z" fill="#ffffff" />
   </g>
 
-  <!-- BYJU'S Brand Wordmark -->
-  <g fill="#813588">
-    <!-- BYJU'S Main Typography -->
-    <text x="145" y="72" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="70" font-weight="900" letter-spacing="-0.02em">BYJU'S</text>
-    <!-- TM -->
-    <text x="440" y="28" font-family="'Outfit', sans-serif" font-size="14" font-weight="700">TM</text>
-    <!-- The Learning App Subtitle -->
-    <text x="148" y="108" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif" font-size="28" font-weight="700" letter-spacing="0.02em" fill="#5c2062">The Learning App</text>
-  </g>
+  <!-- BYJU'S Wordmark on Right -->
+  <text x="135" y="86" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="82" font-weight="900" letter-spacing="-0.01em" fill="#813588">BYJU'S</text>
 </svg>
