@@ -24,7 +24,7 @@ const CONFIG = {
     EVENT_VENUE: "Aryabhatta Auditorium, KJSSE",
     
     // Zero to One Workshop Unstop link
-    DAY2_UNSTOP_URL: "https://unstop.com/m/opportunity/1766441/step3",
+    DAY2_UNSTOP_URL: "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops",
 
     // Contacts
     CONTACTS: [
