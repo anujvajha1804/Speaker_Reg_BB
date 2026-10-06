@@ -2,10 +2,8 @@
 // CONFIGURATION
 // ====================================================
 
-// Google Sheet ID: retrieved securely from Script Properties (environment variable)
-// In Apps Script: Go to Project Settings (⚙) > Script Properties > Add Property:
+// Google Sheet ID: retrieved securely from Script Properties (Project Settings > Script Properties)
 // Key: SPREADSHEET_ID | Value: your_spreadsheet_id
-// (If container-bound to the sheet via Extensions > Apps Script, leave as empty and it auto-detects)
 const SPREADSHEET_ID = PropertiesService.getScriptProperties().getProperty("SPREADSHEET_ID") || ""; 
 
 // Tab name inside your Google Sheet
