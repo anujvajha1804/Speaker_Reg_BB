@@ -313,7 +313,7 @@ function sendConfirmationEmail(email, fullName) {
   try {
     if (!email) return;
 
-    const unstopLink = "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops";
+    const unstopLink = PropertiesService.getScriptProperties().getProperty("DAY2_UNSTOP_URL") || "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops";
     const subject = "You’re In! Welcome to TheNextChapter 🌱";
 
     const plainTextBody = 
