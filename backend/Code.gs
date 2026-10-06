@@ -1,17 +1,12 @@
-/**
- * TheNextChapter | In Conversation with Divya Gokulnath
- * Google Apps Script Backend (Code.gs)
- * 
- * Directly connected to Google Sheet:
- * https://docs.google.com/spreadsheets/d/18_HAVxoha6-lqeo2lrJFKsk2uCR7o9Re4wq4hLoAD7A/edit
- */
-
 // ====================================================
 // CONFIGURATION
 // ====================================================
 
-// Your Google Sheet ID
-const SPREADSHEET_ID = "18_HAVxoha6-lqeo2lrJFKsk2uCR7o9Re4wq4hLoAD7A"; 
+// Google Sheet ID: retrieved securely from Script Properties (environment variable)
+// In Apps Script: Go to Project Settings (⚙) > Script Properties > Add Property:
+// Key: SPREADSHEET_ID | Value: your_spreadsheet_id
+// (If container-bound to the sheet via Extensions > Apps Script, leave as empty and it auto-detects)
+const SPREADSHEET_ID = PropertiesService.getScriptProperties().getProperty("SPREADSHEET_ID") || ""; 
 
 // Tab name inside your Google Sheet
 const SHEET_NAME = "Registrations";
@@ -232,7 +227,16 @@ function testPermission() {
 // ====================================================
 
 function getOrCreateSheet() {
-  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let ss;
+  if (SPREADSHEET_ID && SPREADSHEET_ID.trim() !== "") {
+    ss = SpreadsheetApp.openById(SPREADSHEET_ID.trim());
+  } else {
+    ss = SpreadsheetApp.getActiveSpreadsheet();
+  }
+
+  if (!ss) {
+    throw new Error("Spreadsheet not found. Please configure SPREADSHEET_ID in Script Properties or run directly inside the Google Sheet via Extensions > Apps Script.");
+  }
 
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
