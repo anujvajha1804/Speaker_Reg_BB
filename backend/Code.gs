@@ -213,8 +213,9 @@ function doGet() {
 }
 
 // ====================================================
-// ONE-CLICK PERMISSION & INITIALIZATION FUNCTION
+// ONE-CLICK PERMISSION & TEST FUNCTION
 // ====================================================
+
 function testPermission() {
   const sheet = getOrCreateSheet();
   const ss = sheet.getParent();
@@ -237,10 +238,24 @@ function testPermission() {
 // HELPER FUNCTIONS
 // ====================================================
 
+function cleanSpreadsheetId(rawId) {
+  if (!rawId) return "";
+  let id = rawId.trim();
+  // If a full URL is provided like https://docs.google.com/spreadsheets/d/ID/edit...
+  const match = id.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+  if (match && match[1]) {
+    return match[1];
+  }
+  // If it starts with ID but has /edit... attached
+  return id.split("/")[0].split("?")[0].split("#")[0].trim();
+}
+
 function getOrCreateSheet() {
   let ss;
-  if (SPREADSHEET_ID && SPREADSHEET_ID.trim() !== "") {
-    ss = SpreadsheetApp.openById(SPREADSHEET_ID.trim());
+  const cleanId = cleanSpreadsheetId(SPREADSHEET_ID);
+  
+  if (cleanId && cleanId !== "") {
+    ss = SpreadsheetApp.openById(cleanId);
   } else {
     ss = SpreadsheetApp.getActiveSpreadsheet();
   }
