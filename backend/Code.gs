@@ -183,7 +183,10 @@ function doPost(e) {
 
       sheet.appendRow(rowData);
 
-      // 7. Return Success JSON Response
+      // 7. Send Confirmation Email to Registrant
+      sendConfirmationEmail(email, fullName);
+
+      // 8. Return Success JSON Response
       return createJsonResponse({
         success: true,
         registrationId: registrationId,
@@ -298,3 +301,107 @@ function createJsonResponse(data) {
     .createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+// ====================================================
+// CONFIRMATION EMAIL SENDER
+// ====================================================
+
+/**
+ * Sends a confirmation email to the registrant upon successful registration.
+ */
+function sendConfirmationEmail(email, fullName) {
+  try {
+    if (!email) return;
+
+    const unstopLink = PropertiesService.getScriptProperties().getProperty("DAY2_UNSTOP_URL") || "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops";
+    const subject = "You’re In! Welcome to TheNextChapter 🌱";
+
+    const plainTextBody = 
+      "Hi " + fullName + ",\n\n" +
+      "Your registration for TheNextChapter | In Conversation with Divya Gokulnath, Co-founder of BYJU’S is confirmed! 🎙️\n\n" +
+      "Get ready for an evening of real stories, entrepreneurial insights, challenges, ideas, and conversations — with an opportunity for selected participants to interact and share their ideas.\n\n" +
+      "📅 9th October 2026\n" +
+      "⏰ 3:00 PM onwards\n" +
+      "📍 A building auditorium, KJSSE\n\n" +
+      "And your chapter doesn’t have to end here. 🚀\n\n" +
+      "Join us on 10th October for TheNextChapter — Zero to One Workshop, where we go from IDEATE → VALIDATE → BUILD → PITCH → BLOOM.\n\n" +
+      "🔗 Workshop Registration: " + unstopLink + "\n\n" +
+      "We’re excited to have you with us!\n\n" +
+      "Your degree is one chapter. What you build next could be TheNextChapter. 🌱\n\n" +
+      "Regards,\n" +
+      "Team BloomBox\n" +
+      "The Entrepreneurship Cell of KJSSE";
+
+    const htmlBody = 
+      '<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1e1b4b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; background-color: #ffffff;">' +
+        '<div style="text-align: center; padding-bottom: 16px; border-bottom: 2px solid #581c87;">' +
+          '<h2 style="color: #2b0c3f; margin: 0; font-size: 22px;">TheNextChapter 🌱</h2>' +
+          '<p style="color: #6b21a8; font-weight: bold; margin: 4px 0 0 0; font-size: 14px;">BloomBox — The Entrepreneurship Cell of KJSSE</p>' +
+        '</div>' +
+        '<div style="padding: 20px 0;">' +
+          '<p style="font-size: 16px;">Hi <strong>' + escapeHtml(fullName) + '</strong>,</p>' +
+          '<p>Your registration for <strong>TheNextChapter | In Conversation with Divya Gokulnath, Co-founder of BYJU’S</strong> is confirmed! 🎙️</p>' +
+          '<p>Get ready for an evening of <em>real stories, entrepreneurial insights, challenges, ideas, and conversations</em> — with an opportunity for selected participants to interact and share their ideas.</p>' +
+          '<div style="background-color: #f3e8ff; border-left: 4px solid #7e22ce; padding: 16px; border-radius: 8px; margin: 20px 0;">' +
+            '<p style="margin: 4px 0;">📅 <strong>9th October 2026</strong></p>' +
+            '<p style="margin: 4px 0;">⏰ <strong>3:00 PM onwards</strong></p>' +
+            '<p style="margin: 4px 0;">📍 <strong>A building auditorium, KJSSE</strong></p>' +
+          '</div>' +
+          '<p>And your chapter doesn’t have to end here. 🚀</p>' +
+          '<p>Join us on <strong>10th October</strong> for <strong>TheNextChapter — Zero to One Workshop</strong>, where we go from <strong>IDEATE → VALIDATE → BUILD → PITCH → BLOOM.</strong></p>' +
+          '<p style="margin-top: 16px;">🔗 <strong>Workshop Registration:</strong> ' +
+            '<a href="' + unstopLink + '" target="_blank" style="color: #7e22ce; font-weight: bold; text-decoration: underline;">' +
+              'Register on Unstop Here' +
+            '</a>' +
+          '</p>' +
+          '<p style="margin-top: 24px;">We’re excited to have you with us!</p>' +
+          '<p style="font-style: italic; color: #4c1d95; font-weight: 500; margin-top: 16px;">' +
+            '"Your degree is one chapter. What you build next could be TheNextChapter. 🌱"' +
+          '</p>' +
+        '</div>' +
+        '<div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 16px; font-size: 14px; color: #475569;">' +
+          '<p style="margin: 2px 0;">Regards,</p>' +
+          '<p style="margin: 2px 0; font-weight: bold; color: #2b0c3f;">Team BloomBox</p>' +
+          '<p style="margin: 2px 0; color: #6b21a8;">The Entrepreneurship Cell of KJSSE</p>' +
+        '</div>' +
+      '</div>';
+
+    const senderEmail = PropertiesService.getScriptProperties().getProperty("SENDER_EMAIL") || "bloombox.kjsce@somaiya.edu";
+    const appPassword = PropertiesService.getScriptProperties().getProperty("GMAIL_APP_PASSWORD") || "";
+
+    // Attempt sending via GmailApp (with alias support) or MailApp (with replyTo)
+    try {
+      GmailApp.sendEmail(email, subject, plainTextBody, {
+        htmlBody: htmlBody,
+        name: "Team BloomBox",
+        replyTo: senderEmail,
+        from: senderEmail
+      });
+    } catch (gErr) {
+      Logger.log("GmailApp send failed, falling back to MailApp: " + gErr.toString());
+      MailApp.sendEmail({
+        to: email,
+        subject: subject,
+        body: plainTextBody,
+        htmlBody: htmlBody,
+        name: "Team BloomBox",
+        replyTo: senderEmail
+      });
+    }
+    Logger.log("Confirmation email successfully sent to: " + email + " from " + senderEmail);
+  } catch (err) {
+    Logger.log("Error sending confirmation email to " + email + ": " + err.toString());
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return "";
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+function testSendConfirmationEmail() {
+  const testEmail = Session.getActiveUser().getEmail() || "test@somaiya.edu";
+  sendConfirmationEmail(testEmail, "Test Registrant");
+  Logger.log("Test confirmation email sent to: " + testEmail);
+}
+
