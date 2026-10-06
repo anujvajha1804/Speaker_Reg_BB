@@ -557,33 +557,45 @@ class RegistrationForm {
             return;
         }
 
-        // 5. Gather sanitized form data
+        // 5. Gather sanitized form data (with backward/forward compatibility)
+        const branchVal = this.fields.branchSpecialization ? this.fields.branchSpecialization.value.trim() : "";
+        const pitchStageVal = (isPitching && this.fields.pitchStage ? this.fields.pitchStage.value : "") || "Idea / Exploring";
+        const pitchTitleVal = isPitching && this.fields.pitchTitle ? this.fields.pitchTitle.value.trim() : "";
+        const pitchWhyVal = isPitching && this.fields.pitchWhyDivya ? this.fields.pitchWhyDivya.value.trim() : "";
+        const aiConcernsVal = this.fields.aiEducationConcerns ? this.fields.aiEducationConcerns.value : "";
+
         const formData = {
-            // Section 1
+            // Section 1: Personal Details
             fullName: this.fields.fullName.value.trim(),
             email: this.fields.email.value.trim().toLowerCase(),
             contactNumber: this.fields.contactNumber.value.trim(),
             collegeName: this.fields.collegeName.value.trim(),
-            branchSpecialization: this.fields.branchSpecialization ? this.fields.branchSpecialization.value.trim() : "",
+            branchSpecialization: branchVal,
+            branch: branchVal,
             division: this.fields.division ? this.fields.division.value.trim() : "",
             year: this.fields.year.value,
             courseDegree: this.fields.courseDegree.value.trim(),
 
-            // Section 2
+            // Section 2: AI & Learning
             aiFamiliarity: this.fields.aiFamiliarity.value,
             byjusFamiliarity: this.fields.byjusFamiliarity.value,
-            aiEducationConcerns: this.fields.aiEducationConcerns.value,
+            aiEducationConcerns: aiConcernsVal,
             aiAgentsUsed: this.fields.aiAgentsUsed ? this.fields.aiAgentsUsed.value : "",
             unstopRegistered: this.fields.unstopRegistered ? this.fields.unstopRegistered.value : "No, not yet",
 
-            // Section 3 (Pitch)
+            // Section 3: Pitch & Questions
             pitchOpportunity: this.fields.pitchOpportunity.value,
             pitchType: isPitching && this.fields.pitchType ? this.fields.pitchType.value : "",
-            pitchTitle: isPitching && this.fields.pitchTitle ? this.fields.pitchTitle.value.trim() : "",
-            pitchStage: isPitching && this.fields.pitchStage ? this.fields.pitchStage.value : "",
+            pitchTitle: pitchTitleVal,
+            pitchStage: isPitching ? pitchStageVal : "",
             pitchDeckFile: this.uploadedFileName,
             pitchDeckBase64: this.uploadedFileBase64,
-            pitchWhyDivya: isPitching && this.fields.pitchWhyDivya ? this.fields.pitchWhyDivya.value.trim() : "",
+            pitchWhyDivya: pitchWhyVal,
+
+            // Compatibility mappings for deployed Google Apps Script versions
+            startupStage: pitchStageVal,
+            pitchIdea: pitchTitleVal ? `${pitchTitleVal}${pitchWhyVal ? ' - ' + pitchWhyVal : ''}` : "",
+            speakerQuestion: pitchWhyVal || aiConcernsVal,
 
             source: this.getURLParameter('source') || 'speaker_session_link'
         };
