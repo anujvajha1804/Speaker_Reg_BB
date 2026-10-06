@@ -44,8 +44,8 @@ Then open `http://localhost:8000` in your browser.
 The Google Apps Script code is located in [`backend/Code.gs`](file:///c:/Users/naiti/OneDrive/Desktop/SpeakerRegi/Speaker_Reg_BB/backend/Code.gs).
 
 ### 📊 Google Sheet Connected
-- **Sheet URL**: [TheNextChapter Registrations Sheet](https://docs.google.com/spreadsheets/d/1RJfSL_rcF3G4RgknfvwZNBT1fXdZFLsh1SGS6oxVurD8mUg-i-dC6XJ0/edit)
-- **Spreadsheet ID**: `1RJfSL_rcF3G4RgknfvwZNBT1fXdZFLsh1SGS6oxVurD8mUg-i-dC6XJ0`
+- **Sheet URL**: [TheNextChapter Registrations Sheet](https://docs.google.com/spreadsheets/d/12UocD7WUFXtrxLidG9GcvCOEfah7EYVR508xns8mf5s/edit)
+- **Spreadsheet ID**: `12UocD7WUFXtrxLidG9GcvCOEfah7EYVR508xns8mf5s`
 - **Tab Name**: `Registrations`
 
 ### 📧 Confirmation Email Feature

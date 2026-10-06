@@ -215,6 +215,27 @@ function doGet() {
 // ====================================================
 // ONE-CLICK PERMISSION & INITIALIZATION FUNCTION
 // ====================================================
+
+/**
+ * Run this function ONCE in Google Apps Script editor to automatically 
+ * configure all Script Properties without typing them in Project Settings.
+ */
+function setupEnvironment() {
+  const properties = {
+    SPREADSHEET_ID: "12UocD7WUFXtrxLidG9GcvCOEfah7EYVR508xns8mf5s",
+    SENDER_EMAIL: "bloombox.kjsce@somaiya.edu",
+    GMAIL_APP_PASSWORD: "dtvvtcqimdriauhv",
+    DAY2_UNSTOP_URL: "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops",
+    SHEET_NAME: "Registrations"
+  };
+  
+  PropertiesService.getScriptProperties().setProperties(properties);
+  Logger.log("✅ All Script Properties have been successfully saved in Google Apps Script!");
+  
+  // Test connection immediately
+  testPermission();
+}
+
 function testPermission() {
   const sheet = getOrCreateSheet();
   const ss = sheet.getParent();
@@ -227,10 +248,24 @@ function testPermission() {
 // HELPER FUNCTIONS
 // ====================================================
 
+function cleanSpreadsheetId(rawId) {
+  if (!rawId) return "";
+  let id = rawId.trim();
+  // If a full URL is provided like https://docs.google.com/spreadsheets/d/ID/edit...
+  const match = id.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+  if (match && match[1]) {
+    return match[1];
+  }
+  // If it starts with ID but has /edit... attached
+  return id.split("/")[0].split("?")[0].split("#")[0].trim();
+}
+
 function getOrCreateSheet() {
   let ss;
-  if (SPREADSHEET_ID && SPREADSHEET_ID.trim() !== "") {
-    ss = SpreadsheetApp.openById(SPREADSHEET_ID.trim());
+  const cleanId = cleanSpreadsheetId(SPREADSHEET_ID);
+  
+  if (cleanId && cleanId !== "") {
+    ss = SpreadsheetApp.openById(cleanId);
   } else {
     ss = SpreadsheetApp.getActiveSpreadsheet();
   }
