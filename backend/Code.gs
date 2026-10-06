@@ -223,7 +223,6 @@ function testPermission() {
   Logger.log("Sheet Name: " + ss.getName());
   Logger.log("Sheet URL: " + ss.getUrl());
 
-  // Test email capability to ensure Gmail/Mail permissions are granted
   try {
     const userEmail = Session.getActiveUser().getEmail();
     if (userEmail) {
@@ -337,55 +336,55 @@ function sendConfirmationEmail(email, fullName) {
     if (!email) return;
 
     const unstopLink = PropertiesService.getScriptProperties().getProperty("DAY2_UNSTOP_URL") || "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops";
-    const subject = "You’re In! Welcome to TheNextChapter 🌱";
+    const subject = "You\u2019re In! Welcome to TheNextChapter \uD83C\uDF31";
     const senderEmail = PropertiesService.getScriptProperties().getProperty("SENDER_EMAIL") || "bloombox.kjsce@somaiya.edu";
 
     const plainTextBody = 
       "Hi " + fullName + ",\n\n" +
-      "Your registration for TheNextChapter | In Conversation with Divya Gokulnath, Co-founder of BYJU’S is confirmed! 🎙️\n\n" +
-      "Get ready for an evening of real stories, entrepreneurial insights, challenges, ideas, and conversations — with an opportunity for selected participants to interact and share their ideas.\n\n" +
-      "📅 9th October 2026\n" +
-      "⏰ 3:00 PM onwards\n" +
-      "📍 Aryabhatta Auditorium, KJSSE\n\n" +
-      "And your chapter doesn’t have to end here. 🚀\n\n" +
-      "Join us on 10th October for TheNextChapter — Zero to One Workshop, where we go from IDEATE → VALIDATE → BUILD → PITCH → BLOOM.\n\n" +
-      "🔗 Workshop Registration: " + unstopLink + "\n\n" +
-      "We’re excited to have you with us!\n\n" +
-      "Your degree is one chapter. What you build next could be TheNextChapter. 🌱\n\n" +
+      "Your registration for TheNextChapter | In Conversation with Divya Gokulnath, Co-founder of BYJU\u2019S is confirmed! \uD83C\uDF99\uFE0F\n\n" +
+      "Get ready for an evening of real stories, entrepreneurial insights, challenges, ideas, and conversations \u2014 with an opportunity for selected participants to interact and share their ideas.\n\n" +
+      "\uD83D\uDCC5 9th October 2026\n" +
+      "\u23F0 3:00 PM onwards\n" +
+      "\uD83D\uDCCD A building auditorium, KJSSE\n\n" +
+      "And your chapter doesn\u2019t have to end here. \uD83D\uDE80\n\n" +
+      "Join us on 10th October for TheNextChapter \u2014 Zero to One Workshop, where we go from IDEATE \u2192 VALIDATE \u2192 BUILD \u2192 PITCH \u2192 BLOOM.\n\n" +
+      "\uD83D\uDD17 Workshop Registration: " + unstopLink + "\n\n" +
+      "We\u2019re excited to have you with us!\n\n" +
+      "Your degree is one chapter. What you build next could be TheNextChapter. \uD83C\uDF31\n\n" +
       "Regards,\n" +
-      "Team BloomBox\n" +
+      "Bloombox E-Cell\n" +
       "The Entrepreneurship Cell of KJSSE";
 
     const htmlBody = 
       '<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1e1b4b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; background-color: #ffffff;">' +
         '<div style="text-align: center; padding-bottom: 16px; border-bottom: 2px solid #581c87;">' +
-          '<h2 style="color: #2b0c3f; margin: 0; font-size: 22px;">TheNextChapter 🌱</h2>' +
-          '<p style="color: #6b21a8; font-weight: bold; margin: 4px 0 0 0; font-size: 14px;">BloomBox — The Entrepreneurship Cell of KJSSE</p>' +
+          '<h2 style="color: #2b0c3f; margin: 0; font-size: 22px;">TheNextChapter &#127793;</h2>' +
+          '<p style="color: #6b21a8; font-weight: bold; margin: 4px 0 0 0; font-size: 14px;">Bloombox E-Cell &mdash; The Entrepreneurship Cell of KJSSE</p>' +
         '</div>' +
         '<div style="padding: 20px 0;">' +
           '<p style="font-size: 16px;">Hi <strong>' + escapeHtml(fullName) + '</strong>,</p>' +
-          '<p>Your registration for <strong>TheNextChapter | In Conversation with Divya Gokulnath, Co-founder of BYJU’S</strong> is confirmed! 🎙️</p>' +
-          '<p>Get ready for an evening of <em>real stories, entrepreneurial insights, challenges, ideas, and conversations</em> — with an opportunity for selected participants to interact and share their ideas.</p>' +
+          '<p>Your registration for <strong>TheNextChapter | In Conversation with Divya Gokulnath, Co-founder of BYJU&#8217;S</strong> is confirmed! &#127897;&#65039;</p>' +
+          '<p>Get ready for an evening of <strong>real stories, entrepreneurial insights, challenges, ideas, and conversations</strong> &mdash; with an opportunity for selected participants to interact and share their ideas.</p>' +
           '<div style="background-color: #f3e8ff; border-left: 4px solid #7e22ce; padding: 16px; border-radius: 8px; margin: 20px 0;">' +
-            '<p style="margin: 4px 0;">📅 <strong>9th October 2026</strong></p>' +
-            '<p style="margin: 4px 0;">⏰ <strong>3:00 PM onwards</strong></p>' +
-            '<p style="margin: 4px 0;">📍 <strong>Aryabhatta Auditorium, KJSSE</strong></p>' +
+            '<p style="margin: 6px 0;">&#128197; <strong>9th October 2026</strong></p>' +
+            '<p style="margin: 6px 0;">&#9200; <strong>3:00 PM onwards</strong></p>' +
+            '<p style="margin: 6px 0;">&#128204; <strong>A building auditorium, KJSSE</strong></p>' +
           '</div>' +
-          '<p>And your chapter doesn’t have to end here. 🚀</p>' +
-          '<p>Join us on <strong>10th October</strong> for <strong>TheNextChapter — Zero to One Workshop</strong>, where we go from <strong>IDEATE → VALIDATE → BUILD → PITCH → BLOOM.</strong></p>' +
-          '<p style="margin-top: 16px;">🔗 <strong>Workshop Registration:</strong> ' +
+          '<p>And your chapter doesn&#8217;t have to end here. &#128640;</p>' +
+          '<p>Join us on <strong>10th October</strong> for <strong>TheNextChapter &mdash; Zero to One Workshop</strong>, where we go from <strong>IDEATE &rarr; VALIDATE &rarr; BUILD &rarr; PITCH &rarr; BLOOM.</strong></p>' +
+          '<p style="margin-top: 16px;">&#128279; <strong>Workshop Registration:</strong> ' +
             '<a href="' + unstopLink + '" target="_blank" style="color: #7e22ce; font-weight: bold; text-decoration: underline;">' +
               'Register on Unstop Here' +
             '</a>' +
           '</p>' +
-          '<p style="margin-top: 24px;">We’re excited to have you with us!</p>' +
-          '<p style="font-style: italic; color: #4c1d95; font-weight: 500; margin-top: 16px;">' +
-            '"Your degree is one chapter. What you build next could be TheNextChapter. 🌱"' +
+          '<p style="margin-top: 24px;">We&#8217;re excited to have you with us!</p>' +
+          '<p style="color: #4c1d95; font-weight: bold; margin-top: 16px;">' +
+            'Your degree is one chapter. What you build next could be TheNextChapter. &#127793;' +
           '</p>' +
         '</div>' +
         '<div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 16px; font-size: 14px; color: #475569;">' +
           '<p style="margin: 2px 0;">Regards,</p>' +
-          '<p style="margin: 2px 0; font-weight: bold; color: #2b0c3f;">Team BloomBox</p>' +
+          '<p style="margin: 2px 0; font-weight: bold; color: #2b0c3f;">Bloombox E-Cell</p>' +
           '<p style="margin: 2px 0; color: #6b21a8;">The Entrepreneurship Cell of KJSSE</p>' +
         '</div>' +
       '</div>';
@@ -396,7 +395,7 @@ function sendConfirmationEmail(email, fullName) {
       subject: subject,
       body: plainTextBody,
       htmlBody: htmlBody,
-      name: "Team BloomBox",
+      name: "Bloombox E-Cell",
       replyTo: senderEmail
     };
 
@@ -404,13 +403,10 @@ function sendConfirmationEmail(email, fullName) {
     let canUseFrom = false;
     try {
       const activeUser = Session.getActiveUser().getEmail();
-      Logger.log("Script executed by account: " + activeUser);
-      
       if (activeUser && activeUser.toLowerCase() === senderEmail.toLowerCase()) {
         canUseFrom = true;
       } else {
         const aliases = GmailApp.getAliases();
-        Logger.log("Available Gmail aliases for " + activeUser + ": " + JSON.stringify(aliases));
         if (aliases && aliases.indexOf(senderEmail) !== -1) {
           canUseFrom = true;
         }
@@ -421,8 +417,6 @@ function sendConfirmationEmail(email, fullName) {
 
     if (canUseFrom) {
       mailOptions.from = senderEmail;
-    } else {
-      Logger.log("Note: '" + senderEmail + "' is not a verified alias for the deploying account. Sending with replyTo: " + senderEmail);
     }
 
     // Try GmailApp first, fall back to MailApp
@@ -430,7 +424,7 @@ function sendConfirmationEmail(email, fullName) {
       GmailApp.sendEmail(email, subject, plainTextBody, mailOptions);
       Logger.log("Confirmation email successfully sent via GmailApp to: " + email);
     } catch (gErr) {
-      Logger.log("GmailApp send failed (" + gErr.toString() + "), attempting MailApp fallback...");
+      Logger.log("GmailApp send notice (" + gErr.toString() + "), attempting MailApp fallback...");
       MailApp.sendEmail(mailOptions);
       Logger.log("Confirmation email successfully sent via MailApp to: " + email);
     }
@@ -461,4 +455,3 @@ function testSendConfirmationEmail() {
   sendConfirmationEmail(testEmail, "Test Registrant");
   Logger.log("Test finished. Please check your inbox at: " + testEmail);
 }
-
