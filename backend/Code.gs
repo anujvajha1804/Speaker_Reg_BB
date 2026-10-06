@@ -223,6 +223,16 @@ function testPermission() {
   Logger.log("Successfully connected to Google Sheet!");
   Logger.log("Sheet Name: " + ss.getName());
   Logger.log("Sheet URL: " + ss.getUrl());
+
+  // Test email capability to ensure Gmail/Mail permissions are granted
+  try {
+    const userEmail = Session.getActiveUser().getEmail();
+    if (userEmail) {
+      Logger.log("Active user email: " + userEmail);
+    }
+  } catch (e) {
+    Logger.log("Permission check notice: " + e.toString());
+  }
 }
 
 // ====================================================
@@ -315,6 +325,7 @@ function sendConfirmationEmail(email, fullName) {
 
     const unstopLink = PropertiesService.getScriptProperties().getProperty("DAY2_UNSTOP_URL") || "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops";
     const subject = "You’re In! Welcome to TheNextChapter 🌱";
+    const senderEmail = PropertiesService.getScriptProperties().getProperty("SENDER_EMAIL") || "bloombox.kjsce@somaiya.edu";
 
     const plainTextBody = 
       "Hi " + fullName + ",\n\n" +
@@ -322,7 +333,7 @@ function sendConfirmationEmail(email, fullName) {
       "Get ready for an evening of real stories, entrepreneurial insights, challenges, ideas, and conversations — with an opportunity for selected participants to interact and share their ideas.\n\n" +
       "📅 9th October 2026\n" +
       "⏰ 3:00 PM onwards\n" +
-      "📍 A building auditorium, KJSSE\n\n" +
+      "📍 Aryabhatta Auditorium, KJSSE\n\n" +
       "And your chapter doesn’t have to end here. 🚀\n\n" +
       "Join us on 10th October for TheNextChapter — Zero to One Workshop, where we go from IDEATE → VALIDATE → BUILD → PITCH → BLOOM.\n\n" +
       "🔗 Workshop Registration: " + unstopLink + "\n\n" +
@@ -345,7 +356,7 @@ function sendConfirmationEmail(email, fullName) {
           '<div style="background-color: #f3e8ff; border-left: 4px solid #7e22ce; padding: 16px; border-radius: 8px; margin: 20px 0;">' +
             '<p style="margin: 4px 0;">📅 <strong>9th October 2026</strong></p>' +
             '<p style="margin: 4px 0;">⏰ <strong>3:00 PM onwards</strong></p>' +
-            '<p style="margin: 4px 0;">📍 <strong>A building auditorium, KJSSE</strong></p>' +
+            '<p style="margin: 4px 0;">📍 <strong>Aryabhatta Auditorium, KJSSE</strong></p>' +
           '</div>' +
           '<p>And your chapter doesn’t have to end here. 🚀</p>' +
           '<p>Join us on <strong>10th October</strong> for <strong>TheNextChapter — Zero to One Workshop</strong>, where we go from <strong>IDEATE → VALIDATE → BUILD → PITCH → BLOOM.</strong></p>' +
@@ -366,29 +377,51 @@ function sendConfirmationEmail(email, fullName) {
         '</div>' +
       '</div>';
 
-    const senderEmail = PropertiesService.getScriptProperties().getProperty("SENDER_EMAIL") || "bloombox.kjsce@somaiya.edu";
-    const appPassword = PropertiesService.getScriptProperties().getProperty("GMAIL_APP_PASSWORD") || "";
+    // Build base email options
+    const mailOptions = {
+      to: email,
+      subject: subject,
+      body: plainTextBody,
+      htmlBody: htmlBody,
+      name: "Team BloomBox",
+      replyTo: senderEmail
+    };
 
-    // Attempt sending via GmailApp (with alias support) or MailApp (with replyTo)
+    // Check if senderEmail is a valid verified Gmail alias for the active account
+    let canUseFrom = false;
     try {
-      GmailApp.sendEmail(email, subject, plainTextBody, {
-        htmlBody: htmlBody,
-        name: "Team BloomBox",
-        replyTo: senderEmail,
-        from: senderEmail
-      });
-    } catch (gErr) {
-      Logger.log("GmailApp send failed, falling back to MailApp: " + gErr.toString());
-      MailApp.sendEmail({
-        to: email,
-        subject: subject,
-        body: plainTextBody,
-        htmlBody: htmlBody,
-        name: "Team BloomBox",
-        replyTo: senderEmail
-      });
+      const activeUser = Session.getActiveUser().getEmail();
+      Logger.log("Script executed by account: " + activeUser);
+      
+      if (activeUser && activeUser.toLowerCase() === senderEmail.toLowerCase()) {
+        canUseFrom = true;
+      } else {
+        const aliases = GmailApp.getAliases();
+        Logger.log("Available Gmail aliases for " + activeUser + ": " + JSON.stringify(aliases));
+        if (aliases && aliases.indexOf(senderEmail) !== -1) {
+          canUseFrom = true;
+        }
+      }
+    } catch (aliasErr) {
+      Logger.log("Alias check notice: " + aliasErr.toString());
     }
-    Logger.log("Confirmation email successfully sent to: " + email + " from " + senderEmail);
+
+    if (canUseFrom) {
+      mailOptions.from = senderEmail;
+    } else {
+      Logger.log("Note: '" + senderEmail + "' is not a verified alias for the deploying account. Sending with replyTo: " + senderEmail);
+    }
+
+    // Try GmailApp first, fall back to MailApp
+    try {
+      GmailApp.sendEmail(email, subject, plainTextBody, mailOptions);
+      Logger.log("Confirmation email successfully sent via GmailApp to: " + email);
+    } catch (gErr) {
+      Logger.log("GmailApp send failed (" + gErr.toString() + "), attempting MailApp fallback...");
+      MailApp.sendEmail(mailOptions);
+      Logger.log("Confirmation email successfully sent via MailApp to: " + email);
+    }
+
   } catch (err) {
     Logger.log("Error sending confirmation email to " + email + ": " + err.toString());
   }
@@ -399,9 +432,20 @@ function escapeHtml(str) {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
+/**
+ * Run this function in Apps Script editor (▷ Run) to test email sending and grant permissions
+ */
 function testSendConfirmationEmail() {
-  const testEmail = Session.getActiveUser().getEmail() || "test@somaiya.edu";
+  const activeUser = Session.getActiveUser().getEmail();
+  const testEmail = activeUser || "bloombox.kjsce@somaiya.edu";
+  const quota = MailApp.getRemainingDailyQuota();
+
+  Logger.log("=== EMAIL DIAGNOSTICS ===");
+  Logger.log("Active Account: " + activeUser);
+  Logger.log("Remaining Daily Email Quota: " + quota);
+  Logger.log("Sending test email to: " + testEmail);
+
   sendConfirmationEmail(testEmail, "Test Registrant");
-  Logger.log("Test confirmation email sent to: " + testEmail);
+  Logger.log("Test finished. Please check your inbox at: " + testEmail);
 }
 
