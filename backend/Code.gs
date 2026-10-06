@@ -366,14 +366,29 @@ function sendConfirmationEmail(email, fullName) {
         '</div>' +
       '</div>';
 
-    MailApp.sendEmail({
-      to: email,
-      subject: subject,
-      body: plainTextBody,
-      htmlBody: htmlBody,
-      name: "Team BloomBox"
-    });
-    Logger.log("Confirmation email successfully sent to: " + email);
+    const senderEmail = PropertiesService.getScriptProperties().getProperty("SENDER_EMAIL") || "bloombox.kjsce@somaiya.edu";
+    const appPassword = PropertiesService.getScriptProperties().getProperty("GMAIL_APP_PASSWORD") || "dtvv tcqi mdri auhv";
+
+    // Attempt sending via GmailApp (with alias support) or MailApp (with replyTo)
+    try {
+      GmailApp.sendEmail(email, subject, plainTextBody, {
+        htmlBody: htmlBody,
+        name: "Team BloomBox",
+        replyTo: senderEmail,
+        from: senderEmail
+      });
+    } catch (gErr) {
+      Logger.log("GmailApp send failed, falling back to MailApp: " + gErr.toString());
+      MailApp.sendEmail({
+        to: email,
+        subject: subject,
+        body: plainTextBody,
+        htmlBody: htmlBody,
+        name: "Team BloomBox",
+        replyTo: senderEmail
+      });
+    }
+    Logger.log("Confirmation email successfully sent to: " + email + " from " + senderEmail);
   } catch (err) {
     Logger.log("Error sending confirmation email to " + email + ": " + err.toString());
   }
