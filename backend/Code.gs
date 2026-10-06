@@ -213,28 +213,8 @@ function doGet() {
 }
 
 // ====================================================
-// ONE-CLICK PERMISSION & INITIALIZATION FUNCTION
+// ONE-CLICK PERMISSION & TEST FUNCTION
 // ====================================================
-
-/**
- * Run this function ONCE in Google Apps Script editor to automatically 
- * configure all Script Properties without typing them in Project Settings.
- */
-function setupEnvironment() {
-  const properties = {
-    SPREADSHEET_ID: "12UocD7WUFXtrxLidG9GcvCOEfah7EYVR508xns8mf5s",
-    SENDER_EMAIL: "bloombox.kjsce@somaiya.edu",
-    GMAIL_APP_PASSWORD: "dtvvtcqimdriauhv",
-    DAY2_UNSTOP_URL: "https://unstop.com/o/q92LkeV?lb=B5P1VLE&utm_medium=Share&utm_source=bloomkjs6233&utm_campaign=Workshops",
-    SHEET_NAME: "Registrations"
-  };
-  
-  PropertiesService.getScriptProperties().setProperties(properties);
-  Logger.log("✅ All Script Properties have been successfully saved in Google Apps Script!");
-  
-  // Test connection immediately
-  testPermission();
-}
 
 function testPermission() {
   const sheet = getOrCreateSheet();
