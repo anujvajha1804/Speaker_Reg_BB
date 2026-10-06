@@ -8,7 +8,7 @@ const CONFIG = {
     // BACKEND & GOOGLE APPS SCRIPT SETTINGS
     // ----------------------------------------------------
     // Replace this with your deployed Google Apps Script Web App URL
-    GOOGLE_APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwWaYbYUoEe8lsJMLzwL1eyg3PZ8KTYeS_0SEeBJAfep3M1lIK-SsdDoAPvb6WzusJp/exec",
+    GOOGLE_APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbyx2-RnUwaeNIelhKe1nC0qurT45Fsxcl7_faPYj7TU5TEVYnmPccL68mFKRnF1iYmTUg/exec",
     
     // Domain restriction for emails (Compulsory @somaiya.edu)
     ALLOWED_EMAIL_DOMAIN: "somaiya.edu",
