@@ -22,8 +22,8 @@ const CONFIG = {
     EVENT_TIME: "3:00 PM Onwards",
     EVENT_VENUE: "Aryabhatta Auditorium, KJSSE",
     
-    // Day 2 Workshop link (Replace with live Unstop URL when ready)
-    DAY2_UNSTOP_URL: "https://unstop.com",
+    // Zero to One Workshop Unstop link
+    DAY2_UNSTOP_URL: "https://unstop.com/m/opportunity/1766441/step3",
 
     // Contacts
     CONTACTS: [

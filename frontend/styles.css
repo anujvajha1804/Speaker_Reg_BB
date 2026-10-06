@@ -353,12 +353,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .byjus-inline-logo {
-    height: 36px;
+    height: 32px;
     width: auto;
     object-fit: contain;
     vertical-align: middle;
     display: inline-block;
-    margin-left: 0.25rem;
+    margin-left: 0.35rem;
+    transform: translateY(-2px);
 }
 
 .hero-tagline-heading {
@@ -2169,7 +2170,9 @@ html, body {
     }
 
     .byjus-inline-logo {
-        height: 28px;
+        height: 26px;
+        margin-left: 0.25rem;
+        transform: translateY(-1.5px);
     }
 
     .hero-tagline-heading {
