@@ -367,7 +367,7 @@ function sendConfirmationEmail(email, fullName) {
       '</div>';
 
     const senderEmail = PropertiesService.getScriptProperties().getProperty("SENDER_EMAIL") || "bloombox.kjsce@somaiya.edu";
-    const appPassword = PropertiesService.getScriptProperties().getProperty("GMAIL_APP_PASSWORD") || "dtvv tcqi mdri auhv";
+    const appPassword = PropertiesService.getScriptProperties().getProperty("GMAIL_APP_PASSWORD") || "";
 
     // Attempt sending via GmailApp (with alias support) or MailApp (with replyTo)
     try {
