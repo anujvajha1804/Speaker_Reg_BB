@@ -120,7 +120,10 @@ class ThumbprintAnimation {
         if (this.elements.errorIcon) this.elements.errorIcon.style.display = 'flex';
 
         if (this.elements.title) this.elements.title.textContent = "Something Went Wrong";
-        if (this.elements.sub) this.elements.sub.textContent = errorMessage;
+        if (this.elements.sub) {
+            this.elements.sub.textContent = errorMessage;
+            this.elements.sub.style.display = "block";
+        }
 
         if (this.elements.retryBtn) {
             this.elements.retryBtn.style.display = 'inline-flex';
