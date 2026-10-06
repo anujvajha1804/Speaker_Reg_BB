@@ -2,9 +2,9 @@
 // CONFIGURATION
 // ====================================================
 
-// Google Sheet ID: retrieved securely from Script Properties (or fallback)
-// Key: SPREADSHEET_ID | Value: 1RJfSL_rcF3G4RgknfvwZNBT1fXdZFLsh1SGS6oxVurD8mUg-i-dC6XJ0
-const SPREADSHEET_ID = PropertiesService.getScriptProperties().getProperty("SPREADSHEET_ID") || "1RJfSL_rcF3G4RgknfvwZNBT1fXdZFLsh1SGS6oxVurD8mUg-i-dC6XJ0"; 
+// Google Sheet ID: retrieved securely from Script Properties (Project Settings > Script Properties)
+// Key: SPREADSHEET_ID | Value: your_spreadsheet_id
+const SPREADSHEET_ID = PropertiesService.getScriptProperties().getProperty("SPREADSHEET_ID") || ""; 
 
 // Tab name inside your Google Sheet
 const SHEET_NAME = "Registrations";
